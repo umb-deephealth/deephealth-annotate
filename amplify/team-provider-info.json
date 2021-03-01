@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-deephealthannotate-dev-72511-authRole",
+      "UnauthRoleArn": "arn:aws:iam::211673574488:role/amplify-deephealthannotate-dev-72511-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::211673574488:role/amplify-deephealthannotate-dev-72511-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-deephealthannotate-dev-72511-deployment",
+      "UnauthRoleName": "amplify-deephealthannotate-dev-72511-unauthRole",
+      "StackName": "amplify-deephealthannotate-dev-72511",
+      "StackId": "arn:aws:cloudformation:us-east-2:211673574488:stack/amplify-deephealthannotate-dev-72511/2eb16ce0-7a89-11eb-9fbd-0695cb65cfc2",
+      "AmplifyAppId": "dg34dbqetaozj"
+    },
+    "categories": {
+      "auth": {
+        "deephealthannotatef927bf81": {}
+      }
+    }
+  }
+}

@@ -9,6 +9,9 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
+  "browser": {
+    "crypto": false
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~11.2.3",
@@ -19,6 +22,7 @@
     "@angular/platform-browser": "~11.2.3",
     "@angular/platform-browser-dynamic": "~11.2.3",
     "@angular/router": "~11.2.3",
+    "@aws-amplify/ui-angular": "^1.0.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
