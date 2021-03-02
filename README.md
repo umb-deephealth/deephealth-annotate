@@ -1,4 +1,4 @@
-# DeephealthAnnotate [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT) 
+# DeepHealth Annotate [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT) 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.2.
 
