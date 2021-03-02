@@ -1,9 +1,8 @@
-<amplify-authenticator *ngIf="authState !== 'signedin'"></amplify-authenticator>
+<amplify-authenticator usernameAlias="email" *ngIf="authState !== 'signedin'"></amplify-authenticator>
 
 <div *ngIf="authState === 'signedin' && user" class="App">
-    <amplify-sign-out></amplify-sign-out>
-    <div>Hello, {{user.username}}</div>
-    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
 <!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
 <!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
@@ -320,7 +319,15 @@
     </a>
 </div>
 
+
 <div class="content" role="main">
+
+  <!--- USER GREETING --->
+  <div style="padding-bottom: 20px;">Hello, {{user.username}}
+    <amplify-sign-out button-text="Sign Out"></amplify-sign-out>
+  </div>
+
+  <amplify-s3-album></amplify-s3-album>
 
   <!-- Highlight Card -->
   <div class="card highlight-card card-small">
@@ -342,9 +349,6 @@
     </svg>
 
   </div>
-
-  <amplify-authenticator *ngIf="authState !== 'signedin'"></amplify-authenticator>
-
 
   <!-- Resources -->
   <h2>Resources</h2>
@@ -538,7 +542,6 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 
-
 <router-outlet></router-outlet>
 
-</div>
+</div> <!-- END OF AUTH DIV-->
