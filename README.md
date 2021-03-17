@@ -1,4 +1,4 @@
-# DeephealthAnnotate
+# DeepHealth Annotate [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT) [![CodeQL](https://github.com/umb-deephealth/deephealth-annotate/actions/workflows/codeql-analysis.yml/badge.svg?branch=main)](https://github.com/umb-deephealth/deephealth-annotate/actions/workflows/codeql-analysis.yml)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.2.
 
