@@ -29,7 +29,7 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 48px;
+    height: 42px;
     display: flex;
     align-items: center;
     background-color: #000000;
@@ -41,7 +41,7 @@
   }
 
   .toolbar img {
-    margin: 0 8px;
+    margin: 0 6px;
   }
 
   .toolbar img:hover {
@@ -57,6 +57,38 @@
     align-items: center;
   }
 
+  .main {
+    margin-top: 4em; 
+    height: 860px;
+  }
+
+  .choose_file{
+    padding: 5px 10px;
+    background: rgb(211, 34, 81);
+    border: 1px solid rgb(211, 34, 81);
+    position: relative;
+    color: #fff;
+    border-radius: 2px;
+    text-align: center;
+    float: right;
+    cursor: pointer;
+    margin-right: 16px;
+    margin-bottom: 20px;
+    margin-top: 1%;
+  }
+
+  .hide_file {
+    position: absolute;
+    z-index: 1000;
+    opacity: 0;
+    cursor: pointer;
+    right: 0;
+    top: 0;
+    height: 100%;
+    font-size: 24px;
+    width: 100%; 
+  }
+
   a,
   a:visited,
   a:hover {
@@ -66,26 +98,6 @@
 
   a:hover {
     color: #125699;
-  }
-
-  .circle-link {
-    height: 40px;
-    width: 40px;
-    border-radius: 40px;
-    margin: 8px;
-    background-color: white;
-    border: 1px solid #eeeeee;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    transition: 1s ease-out;
-  }
-
-  .circle-link:hover {
-    transform: translateY(-0.25rem);
-    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
   }
 
   footer {
@@ -98,22 +110,4 @@
   footer a {
     display: flex;
     align-items: center;
-  }
-
-  /* Responsive Styles */
-  @media screen and (max-width: 767px) {
-
-    .card-container > *:not(.circle-link) ,
-    .terminal {
-      width: 100%;
-    }
-
-    .card:not(.highlight-card) {
-      height: 16px;
-      margin: 8px 0;
-    }
-
-    .card.highlight-card span {
-      margin-left: 72px;
-    }
   }
