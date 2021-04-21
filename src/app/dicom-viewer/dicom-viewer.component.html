@@ -1,0 +1,113 @@
+<div style="display: flex; width:100%; height: 100%;">
+    <div class="thumbnailSelector" *ngIf="seriesList.length > -1" style="margin-right: 1px;">
+        <div class="thumbnails list-group" style="height: 100%;">
+            <a *ngFor="let series of seriesList; let i=index" [ngClass]="{'active': currentSeriesIndex === i}" class="list-group-item"
+                oncontextmenu="return false" unselectable="on" onselectstart="return false;" onmousedown="return false;"
+                (click)="showSeries(i)">
+                <div thumbnail [imageData]="series.imageList[0]" class="csthumbnail" oncontextmenu="return false"
+                    unselectable="on" onselectstart="return false;" onmousedown="return false;">
+                </div>
+                <div class="text-center small" style="color:white;">{{series.seriesDescription}}</div>
+                <div id="mrtopright" style="position: absolute;top:3px; right:3px">
+                    <div id="imageCount" style="color: #838383; font-size: 14pt">{{series.imageCount}}</div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+
+    <!--container where image will be loaded-->
+    <div style="overflow: hidden; width: 100%; height: 100%; background-color: #252525;">
+
+        <!-- Toolbar -->
+        <div>
+            <div class="btn-group">
+                <div class="btn-group" *ngIf="enableViewerTools">
+                    <!-- Pan -->
+                    <button type="button" (click)="enablePan()" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip"
+                      data-placement="bottom" title="Pan"><span class="fa fa-arrows-alt"></span></button>
+                    <!-- Zoom -->
+                    <button type="button" (click)="enableZoom()" class="btn btn-sm btn-default" data-container='body'
+                      data-toggle="tooltip" data-placement="bottom" title="Zoom"><span class="fa fa-search"></span></button>
+                    <!-- WW/WL -->
+                    <button type="button" (click)="enableWindowing()" class="btn btn-sm btn-default" data-container='body'
+                        data-toggle="tooltip" data-placement="bottom" title="Windowing"><span class="fa fa-sun"></span></button>
+                    <!-- Invert -->
+                    <button type="button" (click)="invertImage()" class="btn btn-sm btn-default" data-container='body'
+                        data-toggle="tooltip" data-placement="bottom" title="Invert"><span class="fa fa-adjust"></span></button>
+                    <button type="button" (click)="enableRectangle()" class="btn btn-sm btn-default" data-container='body'
+                        data-toggle="tooltip" data-placement="bottom" title="Rectangle ROI"><span class="far fa-square"></span></button>
+                    <!-- Length measurement -->
+                    <button type="button" (click)="enableLength()" class="btn btn-sm btn-default" data-container='body'
+                        data-toggle="tooltip" data-placement="bottom" title="Length"><span class="fas fa-ruler-horizontal"></span></button>
+                    <!-- Reset Image -->
+                    <button type="button" (click)="resetImage()" class="btn btn-sm btn-default" data-container='body'
+                        data-toggle="tooltip" data-placement="bottom" title="Reset Image"><span class="fas fa-undo"></span></button>
+                </div>
+                <div class="btn-group" style="padding-left: 15em;">
+                    <!-- Download -->
+                    <a *ngIf="downloadImagesURL != ''" [href]="downloadImagesURL" download style="border-left: 1px dotted white;"
+                        class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom"
+                        title="Download Images">
+                        <span class="fa fa-download"></span>
+                    </a>
+                    <!-- Previous Image -->
+                    <button type="button" (click)="previousImage()"
+                        class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom"
+                        title="Previous Image"><span class="fa fa-backward"></span></button>
+                    <!-- Next Image -->
+                    <button type="button" (click)="nextImage()" class="btn btn-sm btn-default"
+                        data-container='body' data-toggle="tooltip" data-placement="bottom" title="Next Image"><span
+                            class="fa fa-forward"></span></button>
+                    <!-- Load Next Batch -->
+                    <a type="button" *ngIf="moreImagestoLoad != ''" (click)="loadMoreImages()"
+                        class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom"
+                        title="Load more images..."><i class="fas fa-cloud-download-alt"></i> Click here to load the next {{moreImagestoLoad}} images.
+                    </a>
+                    <!-- Stack scroll -->
+                    <button type="button" (click)="enableScroll()" class="btn btn-sm btn-default" data-container='body'
+                        data-toggle="tooltip" data-placement="bottom" title="Stack Scroll"><span class="fa fa-bars"></span></button>
+                    <!-- Play clip -->
+                    <button type="button" *ngIf="enablePlayTools" (click)="playClip()" class="btn btn-sm btn-default"
+                        data-container='body' data-toggle="tooltip" data-placement="bottom" title="Play Clip"><span
+                            class="fa fa-play"></span></button>
+                    <!-- Stop clip -->
+                    <button type="button" *ngIf="enablePlayTools" (click)="stopClip()" class="btn btn-sm btn-default" data-container='body'
+                        data-toggle="tooltip" data-placement="bottom" title="Stop Clip"><span class="fa fa-stop"></span></button>
+                    <!-- Progress Spinner -->
+                    <div style="padding-left: 15px; padding-top: 15px;" [ngStyle]="showProgress">
+                        <mat-spinner style="display: inline-block;" diameter="30" strokeWidth="5" color="warn"></mat-spinner>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div style="width: 100%; height: calc(100% - 60px); position:relative; display:inline-block; color:white;"
+            oncontextmenu="return false" class='cornerstone-enabled-image' unselectable='on' onselectstart='return false;'
+            onmousedown='return false;'>
+            <div cornerstone style="width: 100%; height: 100%; top:0px; left:0px; position:absolute; outline:none; margin: 0 auto;"
+                id="dicomImage">
+            </div>
+            <div id="mrtopright" style="position:absolute; right:3px; top:3x;">
+                <div *ngIf="viewPort.patientName != ''">
+                    <b>Patient:</b> {{viewPort.patientName}}
+                </div>
+                <div *ngIf="viewPort.instanceNumber != ''">
+                    <b>Instance:</b> {{viewPort.instanceNumber}}
+                </div>
+            </div>
+            <div id="mrbottomleft" style="position:absolute; bottom:3px; left:3px">
+                <div>
+                    <b>WW/WC:</b> {{viewPort.windowingValue}}
+                </div>
+                <div id="zoomText"><b>Zoom:</b> {{viewPort.zoomValue}}</div>
+            </div>
+            <div id="mrbottomright" style="position:absolute; bottom:6px; right:3px">
+                <div id="sliceText"><b>Image:</b> {{(imageCount > 0)?viewPort.currentIndex+1:0}}/{{imageCount}}</div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
