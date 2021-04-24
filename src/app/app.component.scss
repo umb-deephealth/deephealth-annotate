@@ -29,10 +29,18 @@
 
 .toolbar img {
   margin: 0 6px;
+  transition: ease 0.9s;
+  opacity: 1s;
 }
 
 .toolbar img:hover {
-  opacity: 0.8;
+  transition: ease, 0.5s;
+  opacity: 0.4;
+}
+
+.choose_file:hover {
+  transition: ease, 0.5s;
+  opacity: 0.4;
 }
 
 .choose_file {
@@ -48,6 +56,8 @@
   margin-right: 16px;
   margin-bottom: 20px;
   margin-top: 1%;
+  transition: ease, 0.9s;
+  opacity: 1;
 }
 
 .hide_file {
