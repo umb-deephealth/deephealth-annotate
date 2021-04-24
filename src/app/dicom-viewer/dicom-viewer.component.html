@@ -1,4 +1,6 @@
 <div style="display: flex; width:100%; height: 100%;">
+
+    <!-- Thumbnail selector -->
     <div class="thumbnailSelector" *ngIf="seriesList.length > -1" style="margin-right: 1px;">
         <div class="thumbnails list-group" style="height: 100%;">
             <a *ngFor="let series of seriesList; let i=index" [ngClass]="{'active': currentSeriesIndex === i}" class="list-group-item"
@@ -15,20 +17,20 @@
         </div>
     </div>
 
-
     <!--container where image will be loaded-->
     <div style="overflow: hidden; width: 100%; height: 100%; background-color: #252525;">
-
+        <!-- <span style="display: inline;"><a>File</a> | <a>Options</a></span> -->
         <!-- Toolbar -->
-        <div>
-            <div class="btn-group">
+        <div style="border: 2px groove #2c2c2c;">
+            <a>File</a> | <a>Options</a>
+            <div class="btn-group" style="margin-left: 30%; margin-bottom: 2px; border: 1px solid #4b4b4b; border-style: inset;">
                 <div class="btn-group" *ngIf="enableViewerTools">
                     <!-- Pan -->
                     <button type="button" (click)="enablePan()" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip"
-                      data-placement="bottom" title="Pan"><span class="fa fa-arrows-alt"></span></button>
+                    data-placement="bottom" title="Pan"><span class="fa fa-arrows-alt"></span></button>
                     <!-- Zoom -->
                     <button type="button" (click)="enableZoom()" class="btn btn-sm btn-default" data-container='body'
-                      data-toggle="tooltip" data-placement="bottom" title="Zoom"><span class="fa fa-search"></span></button>
+                    data-toggle="tooltip" data-placement="bottom" title="Zoom"><span class="fa fa-search"></span></button>
                     <!-- WW/WL -->
                     <button type="button" (click)="enableWindowing()" class="btn btn-sm btn-default" data-container='body'
                         data-toggle="tooltip" data-placement="bottom" title="Windowing"><span class="fa fa-sun"></span></button>
@@ -44,7 +46,7 @@
                     <button type="button" (click)="resetImage()" class="btn btn-sm btn-default" data-container='body'
                         data-toggle="tooltip" data-placement="bottom" title="Reset Image"><span class="fas fa-undo"></span></button>
                 </div>
-                <div class="btn-group" style="padding-left: 15em;">
+                <div class="btn-group">
                     <!-- Download -->
                     <a *ngIf="downloadImagesURL != ''" [href]="downloadImagesURL" download style="border-left: 1px dotted white;"
                         class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom"
@@ -75,14 +77,15 @@
                     <button type="button" *ngIf="enablePlayTools" (click)="stopClip()" class="btn btn-sm btn-default" data-container='body'
                         data-toggle="tooltip" data-placement="bottom" title="Stop Clip"><span class="fa fa-stop"></span></button>
                     <!-- Progress Spinner -->
-                    <div style="padding-left: 15px; padding-top: 15px;" [ngStyle]="showProgress">
+                    <!-- <div style="padding-left: 15px; padding-top: 15px;" [ngStyle]="showProgress">
                         <mat-spinner style="display: inline-block;" diameter="30" strokeWidth="5" color="warn"></mat-spinner>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
+    
 
-
+        <!-- Viewer -->
         <div style="width: 100%; height: calc(100% - 60px); position:relative; display:inline-block; color:white;"
             oncontextmenu="return false" class='cornerstone-enabled-image' unselectable='on' onselectstart='return false;'
             onmousedown='return false;'>
