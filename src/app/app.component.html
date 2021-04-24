@@ -9,7 +9,7 @@
   />
   </a>
   <div class="spacer"></div>
-  <span style="padding-right: 1%;"><b>Welcome, </b> user</span>
+  <!--<span style="padding-right: 1%;"><b>Welcome, </b> user</span>-->
   <div class="choose_file">
     Choose Your DICOM Files
     <input class="hide_file" type="file" multiple accept="application/dicom" id="images" title="Select your images"
@@ -19,22 +19,7 @@
 
 <!-- Main Content -->
 <div style="height:100%; width: 100%;">
-  <div style="display: flex; height: calc(100% - 90px); width:100%; margin-top: 5em;">
-    <dicom-viewer [enableViewerTools]="true" [enablePlayTools]="false" [maxImagesToLoad]="20" 
-    style="height:100%; width:100%; margin: 1px; border: 4px solid #252525; font-size: 16px;"></dicom-viewer>
-  </div>
-</div>
-
-
-
-<div style="height:100%; width: 100%;">
-  <div style="display: flex; height: calc(100% - 90px); width:100%; margin-top: 5em;">
-    <dicom-viewer [enableViewerTools]="true" [enablePlayTools]="false" [maxImagesToLoad]="20" 
-    style="height:100%; width:100%; margin: 1px; border: 4px solid #252525; font-size: 16px;"></dicom-viewer>
-  </div>
-</div>
-<div style="height:100%; width: 100%;">
-  <div style="display: flex; height: calc(100% - 90px); width:100%; margin-top: 5em;">
+  <div style="display: flex; height: calc(100% - 50px); width:100%; margin-top: 3em;">
     <dicom-viewer [enableViewerTools]="true" [enablePlayTools]="false" [maxImagesToLoad]="20" 
     style="height:100%; width:100%; margin: 1px; border: 4px solid #252525; font-size: 16px;"></dicom-viewer>
   </div>

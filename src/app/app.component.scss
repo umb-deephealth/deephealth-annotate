@@ -60,6 +60,11 @@
   opacity: 1;
 }
 
+.hoverOpacity:hover {
+  transition: ease, 0.5s;
+  opacity: 0.4;
+}
+
 .hide_file {
   position: absolute;
   z-index: 1000;
