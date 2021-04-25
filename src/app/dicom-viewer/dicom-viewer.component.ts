@@ -62,6 +62,7 @@ export class DICOMViewerComponent implements OnInit {
     this.element = this.viewPort.element;
     this.imageIdList = imageIdList;
     this.viewPort.resetViewer();
+    // maybe here we can add a loading icon/animation while DICOM files are loading
     this.viewPort.resetImageCache(); // clean up image cache
     this.seriesList = []; // start a new series list
     this.currentSeriesIndex = 0; // always display first series
@@ -198,7 +199,7 @@ export class DICOMViewerComponent implements OnInit {
   // activate windowing
   public enableWindowing() {
     if (this.imageCount > 0) {
-      this.resetAllTools();
+    //  this.resetAllTools();
       // cornerstoneTools.wwwc.activate(this.element, 1);
       // cornerstoneTools.wwwcTouchDrag.activate(this.element);
       cornerstoneTools.setToolActiveForElement(this.element, 'Wwwc', { mouseButtonMask: 1 }, ['Mouse']);
@@ -209,7 +210,7 @@ export class DICOMViewerComponent implements OnInit {
   // activate zoom
   public enableZoom() {
     if (this.imageCount > 0) {
-      this.resetAllTools();
+   //   this.resetAllTools();
       // cornerstoneTools.zoom.activate(this.element, 5); // 5 is right mouse button and left mouse button
       // cornerstoneTools.zoomTouchDrag.activate(this.element);
       cornerstoneTools.setToolActiveForElement(this.element, 'Zoom', { mouseButtonMask: 1 }, ['Mouse']); // zoom left mouse
@@ -232,7 +233,7 @@ export class DICOMViewerComponent implements OnInit {
   // activate image scroll
   public enableScroll() {
     if (this.imageCount > 0) {
-      this.resetAllTools();
+     // this.resetAllTools();
       // cornerstoneTools.stackScroll.activate(this.element, 1);
       // cornerstoneTools.stackScrollTouchDrag.activate(this.element);
       // cornerstoneTools.stackScrollKeyboard.activate(this.element);
@@ -243,7 +244,7 @@ export class DICOMViewerComponent implements OnInit {
   // activate length measurement
   public enableLength() {
     if (this.imageCount > 0) {
-      this.resetAllTools();
+    //  this.resetAllTools();
       // cornerstoneTools.length.activate(this.element, 1);
       cornerstoneTools.setToolActiveForElement(this.element, 'Length', { mouseButtonMask: 1 }, ['Mouse']);
       cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 2 }, ['Mouse']); // pan right mouse
@@ -253,7 +254,7 @@ export class DICOMViewerComponent implements OnInit {
   // activate angle measurement
   public enableAngle() {
     if (this.imageCount > 0) {
-      this.resetAllTools();
+     // this.resetAllTools();
       // cornerstoneTools.simpleAngle.activate(this.element, 1);
       cornerstoneTools.setToolActiveForElement(this.element, 'Angle', { mouseButtonMask: 1 }, ['Mouse']);
       cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 2 }, ['Mouse']); // pan right mouse
@@ -263,7 +264,7 @@ export class DICOMViewerComponent implements OnInit {
   // activate pixel probe
   public enableProbe() {
     if (this.imageCount > 0) {
-      this.resetAllTools();
+    //  this.resetAllTools();
       // cornerstoneTools.probe.activate(this.element, 1);
       cornerstoneTools.setToolActiveForElement(this.element, 'Probe', { mouseButtonMask: 1 }, ['Mouse']);
       cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 2 }, ['Mouse']); // pan right mouse
@@ -273,7 +274,7 @@ export class DICOMViewerComponent implements OnInit {
   // activate Elliptical ROI
   public enableElliptical() {
     if (this.imageCount > 0) {
-      this.resetAllTools();
+   //   this.resetAllTools();
       // cornerstoneTools.ellipticalRoi.activate(this.element, 1);
       cornerstoneTools.setToolActiveForElement(this.element, 'EllipticalRoi', { mouseButtonMask: 1 }, ['Mouse']);
       cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 2 }, ['Mouse']); // pan right mouse
@@ -283,7 +284,7 @@ export class DICOMViewerComponent implements OnInit {
   // activate Rectangle ROI
   public enableRectangle() {
     if (this.imageCount > 0) {
-      this.resetAllTools();
+     // this.resetAllTools();
       // cornerstoneTools.rectangleRoi.activate(this.element, 1);
       cornerstoneTools.setToolActiveForElement(this.element, 'RectangleRoi', { mouseButtonMask: 1 }, ['Mouse']);
       cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 2 }, ['Mouse']); // pan right mouse
