@@ -328,7 +328,7 @@ export class DICOMViewerComponent implements OnInit {
 
   // reset image
   public resetImage() {
-    if (confirm("Are you sure you want to reset all tools?") == true) {
+    if (confirm("Are you sure you want to reset all annotations?") == true) {
       if (this.imageCount > 0) {
         let toolStateManager = cornerstoneTools.getElementToolStateManager(this.element);
         // Note that this only works on ImageId-specific tool state managers (for now)
