@@ -328,19 +328,22 @@ export class DICOMViewerComponent implements OnInit {
 
   // reset image
   public resetImage() {
-    if (this.imageCount > 0) {
-      let toolStateManager = cornerstoneTools.getElementToolStateManager(this.element);
-      // Note that this only works on ImageId-specific tool state managers (for now)
-      //toolStateManager.clear(this.element);
-      cornerstoneTools.clearToolState(this.element, "Length");
-      cornerstoneTools.clearToolState(this.element, "Angle");
-      cornerstoneTools.clearToolState(this.element, "Probe");
-      cornerstoneTools.clearToolState(this.element, "EllipticalRoi");
-      cornerstoneTools.clearToolState(this.element, "RectangleRoi");
-      cornerstone.updateImage(this.element);
-      this.resetAllTools();
+    if (confirm("Are you sure you want to reset all tools?") == true) {
+      if (this.imageCount > 0) {
+        let toolStateManager = cornerstoneTools.getElementToolStateManager(this.element);
+        // Note that this only works on ImageId-specific tool state managers (for now)
+        //toolStateManager.clear(this.element);
+        cornerstoneTools.clearToolState(this.element, "Length");
+        cornerstoneTools.clearToolState(this.element, "Angle");
+        cornerstoneTools.clearToolState(this.element, "Probe");
+        cornerstoneTools.clearToolState(this.element, "EllipticalRoi");
+        cornerstoneTools.clearToolState(this.element, "RectangleRoi");
+        cornerstone.updateImage(this.element);
+        this.resetAllTools();
+      } 
     }
   }
+
 
   public clearImage() {
     this.viewPort.resetViewer();
