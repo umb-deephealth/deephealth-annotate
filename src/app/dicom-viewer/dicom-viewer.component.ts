@@ -292,7 +292,7 @@ public download(filename, text) {
       Rois.forEach(element => {
         var tooldata = cornerstoneTools.getToolState(this.element, element)
         if (toolString != undefined) {
-          toolString += JSON.stringify(tooldata) + "\n\n" 
+          toolString += element + ": " + JSON.stringify(tooldata) + "\n\n" 
         }
     });
     this.download("Annotations", toolString);
