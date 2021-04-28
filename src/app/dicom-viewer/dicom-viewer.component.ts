@@ -5,6 +5,7 @@ import { ThumbnailDirective } from './thumbnail.directive';
 
 declare const cornerstone;
 declare const cornerstoneTools;
+declare var LastUpdatedElement;
 
 @Component({
   selector: 'dicom-viewer',
@@ -80,9 +81,19 @@ export class DICOMViewerComponent implements OnInit {
 
   }
 
-  /**
-   * Load the next batch of images
-   */
+public download(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
+
   public loadMoreImages() {
     this.element = this.viewPort.element;
     //
@@ -243,13 +254,13 @@ export class DICOMViewerComponent implements OnInit {
   // activate length measurement
   public enableLength() {
     if (this.imageCount > 0) {
-      this.resetAllTools();
+      //this.resetAllTools();
       // cornerstoneTools.length.activate(this.element, 1);
       cornerstoneTools.setToolActiveForElement(this.element, 'Length', { mouseButtonMask: 1 }, ['Mouse']);
       cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 2 }, ['Mouse']); // pan right mouse
+      LastUpdatedElement = 'Length'
     }
   }
-
   // activate angle measurement
   public enableAngle() {
     if (this.imageCount > 0) {
@@ -271,22 +282,41 @@ export class DICOMViewerComponent implements OnInit {
   }
 
   // activate Elliptical ROI
-  public enableElliptical() {
+  public onePageReturn() {
     if (this.imageCount > 0) {
-      this.resetAllTools();
+      var Rois = new Array("RectangleRoi", "Length");
+      var toolArray = new Array()
+      //this.resetAllTools();
       // cornerstoneTools.ellipticalRoi.activate(this.element, 1);
-      cornerstoneTools.setToolActiveForElement(this.element, 'EllipticalRoi', { mouseButtonMask: 1 }, ['Mouse']);
-      cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 2 }, ['Mouse']); // pan right mouse
-    }
+      //cornerstoneTools.setToolActiveForElement(this.element, 'EllipticalRoi', { mouseButtonMask: 1 }, ['Mouse']);
+      //cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 2 }, ['Mouse']); // pan right mouse
+      Rois.forEach(element => {
+        var tooldata = cornerstoneTools.getToolState(this.element, element)
+        if (tooldata != undefined) {
+          toolArray.push(tooldata) 
+        }
+    });
+    return toolArray;
+    //this.download("Annotations", JSON.stringify(toolArray));
+   //this.resetAllTools();
+  }
+}
+  public enableElliptical() {
+    var allPageArrays = new Array()
+    this.loadedImages.forEach(element => {
+      allPageArrays.push(this.onePageReturn())
+    });
+    this.download("Annotations", JSON.stringify(allPageArrays));
   }
 
   // activate Rectangle ROI
   public enableRectangle() {
     if (this.imageCount > 0) {
-      this.resetAllTools();
+      //this.resetAllTools();
       // cornerstoneTools.rectangleRoi.activate(this.element, 1);
       cornerstoneTools.setToolActiveForElement(this.element, 'RectangleRoi', { mouseButtonMask: 1 }, ['Mouse']);
       cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 2 }, ['Mouse']); // pan right mouse
+      LastUpdatedElement = 'RectangleRoi';
     }
   }
 
@@ -324,6 +354,13 @@ export class DICOMViewerComponent implements OnInit {
       cornerstone.setViewport(this.element, viewport);
     }
   }
+  //Undo Last Change
+  public Undo() {
+
+  }
+  //Save Data
+  //public saveToolState() {
+  //}
 
   // reset image
   public resetImage() {

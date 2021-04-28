@@ -38,8 +38,7 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
   private ZoomTouchPinchTool = cornerstoneTools.ZoomTouchPinchTool;
   private PanMultiTouchTool = cornerstoneTools.PanMultiTouchTool;
   private StackScrollTool = cornerstoneTools.StackScrollTool;
-  private StackScrollMouseWheelTool = cornerstoneTools.StackScrollMouseWheelTool;
-
+  private StackScrollMouseWheelTool = cornerstoneTools.StackScrollMouseWheelTools;
 
   public get windowingValue(): string {
     if (this.isCornerstoneEnabled) {
@@ -267,6 +266,6 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
     cornerstoneTools.setToolDisabledForElement(this.element, 'PanMultiTouch');
     cornerstoneTools.setToolDisabledForElement(this.element, 'StackScroll');
     cornerstoneTools.setToolDisabledForElement(this.element, 'StackScrollMouseWheel');
-  }
+    }
 
 }
