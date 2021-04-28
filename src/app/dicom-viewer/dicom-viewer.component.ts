@@ -5,6 +5,7 @@ import { ThumbnailDirective } from './thumbnail.directive';
 
 declare const cornerstone;
 declare const cornerstoneTools;
+declare var LastUpdatedElement;
 
 @Component({
   selector: 'dicom-viewer',
@@ -253,13 +254,13 @@ public download(filename, text) {
   // activate length measurement
   public enableLength() {
     if (this.imageCount > 0) {
-      this.resetAllTools();
+      //this.resetAllTools();
       // cornerstoneTools.length.activate(this.element, 1);
       cornerstoneTools.setToolActiveForElement(this.element, 'Length', { mouseButtonMask: 1 }, ['Mouse']);
       cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 2 }, ['Mouse']); // pan right mouse
+      LastUpdatedElement = 'Length'
     }
   }
-
   // activate angle measurement
   public enableAngle() {
     if (this.imageCount > 0) {
@@ -303,10 +304,11 @@ public download(filename, text) {
   // activate Rectangle ROI
   public enableRectangle() {
     if (this.imageCount > 0) {
-      this.resetAllTools();
+      //this.resetAllTools();
       // cornerstoneTools.rectangleRoi.activate(this.element, 1);
       cornerstoneTools.setToolActiveForElement(this.element, 'RectangleRoi', { mouseButtonMask: 1 }, ['Mouse']);
       cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 2 }, ['Mouse']); // pan right mouse
+      LastUpdatedElement = 'RectangleRoi';
     }
   }
 
@@ -344,8 +346,10 @@ public download(filename, text) {
       cornerstone.setViewport(this.element, viewport);
     }
   }
+  //Undo Last Change
+  public 
   //Save Data
- // public saveToolState() {
+  //public saveToolState() {
   //}
 
   // reset image
