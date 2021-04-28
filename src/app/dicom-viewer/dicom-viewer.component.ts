@@ -282,7 +282,7 @@ public download(filename, text) {
   }
 
   // activate Elliptical ROI
-  public enableElliptical() {
+  public onePageReturn() {
     if (this.imageCount > 0) {
       var Rois = new Array("RectangleRoi", "Length");
       var toolArray = new Array()
@@ -296,10 +296,18 @@ public download(filename, text) {
           toolArray.push(tooldata) 
         }
     });
-    this.download("Annotations", JSON.stringify(toolArray));
+    return toolArray;
+    //this.download("Annotations", JSON.stringify(toolArray));
    //this.resetAllTools();
   }
 }
+  public enableElliptical() {
+    var allPageArrays = new Array()
+    this.loadedImages.forEach(element => {
+      allPageArrays.push(this.onePageReturn())
+    });
+    this.download("Annotations", JSON.stringify(allPageArrays));
+  }
 
   // activate Rectangle ROI
   public enableRectangle() {
@@ -347,7 +355,9 @@ public download(filename, text) {
     }
   }
   //Undo Last Change
-  public 
+  public Undo() {
+
+  }
   //Save Data
   //public saveToolState() {
   //}
