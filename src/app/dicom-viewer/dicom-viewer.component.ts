@@ -80,9 +80,19 @@ export class DICOMViewerComponent implements OnInit {
 
   }
 
-  /**
-   * Load the next batch of images
-   */
+public download(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
+
   public loadMoreImages() {
     this.element = this.viewPort.element;
     //
@@ -273,12 +283,22 @@ export class DICOMViewerComponent implements OnInit {
   // activate Elliptical ROI
   public enableElliptical() {
     if (this.imageCount > 0) {
-      this.resetAllTools();
+      var Rois = new Array("RectangleRoi", "Length");
+      var toolString = "";
+      //this.resetAllTools();
       // cornerstoneTools.ellipticalRoi.activate(this.element, 1);
-      cornerstoneTools.setToolActiveForElement(this.element, 'EllipticalRoi', { mouseButtonMask: 1 }, ['Mouse']);
-      cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 2 }, ['Mouse']); // pan right mouse
-    }
+      //cornerstoneTools.setToolActiveForElement(this.element, 'EllipticalRoi', { mouseButtonMask: 1 }, ['Mouse']);
+      //cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 2 }, ['Mouse']); // pan right mouse
+      Rois.forEach(element => {
+        var tooldata = cornerstoneTools.getToolState(this.element, element)
+        if (toolString != undefined) {
+          toolString += JSON.stringify(tooldata) + "\n\n" 
+        }
+    });
+    this.download("Annotations", toolString);
+    this.resetAllTools();
   }
+}
 
   // activate Rectangle ROI
   public enableRectangle() {
@@ -324,6 +344,9 @@ export class DICOMViewerComponent implements OnInit {
       cornerstone.setViewport(this.element, viewport);
     }
   }
+  //Save Data
+ // public saveToolState() {
+  //}
 
   // reset image
   public resetImage() {
