@@ -282,7 +282,8 @@ public download(filename, text) {
   }
 
   // activate Elliptical ROI
-  public enableElliptical() {
+  // from Sahmeer's branch: this method is used to download tool data (a new method name is not recognized in dicom-viewer.component.html)
+  public saveToolState() {
     if (this.imageCount > 0) {
       var Rois = new Array("RectangleRoi", "Length");
       var toolString = "";
@@ -297,7 +298,7 @@ public download(filename, text) {
         }
     });
     this.download("Annotations", toolString);
-    this.resetAllTools();
+   // this.resetAllTools();
   }
 }
 
@@ -345,9 +346,6 @@ public download(filename, text) {
       cornerstone.setViewport(this.element, viewport);
     }
   }
-  //Save Data
- // public saveToolState() {
-  //}
 
   // reset image
   public resetImage() {
