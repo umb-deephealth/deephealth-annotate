@@ -291,12 +291,12 @@ public download(filename, text) {
       //cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 2 }, ['Mouse']); // pan right mouse
       Rois.forEach(element => {
         var tooldata = cornerstoneTools.getToolState(this.element, element)
-        if (toolString != undefined) {
-          toolString += element + ": " + JSON.stringify(tooldata) + "\n\n" 
+        if (tooldata != undefined) {
+          toolString += JSON.stringify(tooldata) + "\n\n" 
         }
     });
     this.download("Annotations", toolString);
-    this.resetAllTools();
+   //this.resetAllTools();
   }
 }
 
