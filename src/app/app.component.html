@@ -19,24 +19,12 @@
   />
   </a>
   <div class="spacer"></div>
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/ayah
   <div class="choose_file">
     Choose DICOM Files
     <input class="hide_file" type="file" multiple accept="application/dicom" id="images" title="Select your images"
     (change)="loadDICOMImages($event.target.files)">
   </div>
   <button mat-button style="margin: 10px;">?</button>
-</div>
-
-<!-- Main Content -->
-<div style="height:100%; width: 100%;">
-  <div style="display: flex; height: calc(100% - 90px); width:100%; margin-top: 3em;">
-    <dicom-viewer [enableViewerTools]="true" [enablePlayTools]="true" [maxImagesToLoad]="1000000" 
-    style="height:100%; width:100%; margin: 1px; border: 2px solid #1a1a1a; font-size: 16px;"></dicom-viewer>
-  </div>
 </div>
 
 

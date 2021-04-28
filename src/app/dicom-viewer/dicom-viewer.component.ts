@@ -79,21 +79,20 @@ export class DICOMViewerComponent implements OnInit {
       const imageId = imageIdList[index];
       cornerstone.loadAndCacheImage(imageId).then(imageData => { this.imageLoaded(imageData) });
     }
-
   }
 
-public download(filename, text) {
-  var element = document.createElement('a');
-  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-  element.setAttribute('download', filename);
+  public download(filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
 
-  element.style.display = 'none';
-  document.body.appendChild(element);
+    element.style.display = 'none';
+    document.body.appendChild(element);
 
-  element.click();
+    element.click();
 
-  document.body.removeChild(element);
-}
+    document.body.removeChild(element);
+  }
 
   public loadMoreImages() {
     this.element = this.viewPort.element;
@@ -110,7 +109,6 @@ public download(filename, text) {
         .then(imageData => { this.imageLoaded(imageData) })
         .catch(err => { this.targetImageCount--; });
     }
-
   }
 
   /**
@@ -252,6 +250,11 @@ public download(filename, text) {
     }
   }
 
+  public toggleScroll() {
+    this.viewPort.toggleScroll();
+    //cornerstoneTools.setToolActiveForElement(this.element, 'StackScroll', { mouseButtonMask: 1 }, ['Mouse']);
+  }
+
   // activate length measurement
   public enableLength() {
     if (this.imageCount > 0) {
@@ -297,17 +300,20 @@ public download(filename, text) {
         if (tooldata != undefined) {
           toolArray.push(tooldata) 
         }
-    });
-    return toolArray;
-    //this.download("Annotations", JSON.stringify(toolArray));
-   //this.resetAllTools();
+      });
+    }
+    
+    this.download("Annotations", JSON.stringify(toolArray));
+    //return toolArray;
+    //this.resetAllTools();
     //this.download("Annotations", toolString);
-   // this.resetAllTools();
-}
+    // this.resetAllTools();
+  }
+
   public enableElliptical() {
     var allPageArrays = new Array()
     this.loadedImages.forEach(element => {
-      allPageArrays.push(this.onePageReturn())
+      //allPageArrays.push(this.onePageReturn())
     });
     this.download("Annotations", JSON.stringify(allPageArrays));
   }
@@ -357,10 +363,12 @@ public download(filename, text) {
       cornerstone.setViewport(this.element, viewport);
     }
   }
+
   //Undo Last Change
   public Undo() {
 
   }
+
   //Save Data
   //public saveToolState() {
   //}

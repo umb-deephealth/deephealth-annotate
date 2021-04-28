@@ -70,7 +70,7 @@
                         title="Load more images..."><i class="fas fa-cloud-download-alt"></i> Click here to load the next {{moreImagestoLoad}} images.
                     </a>
                     <!-- Stack scroll -->
-                    <button type="button" (click)="enableScroll()" class="btn btn-sm btn-default" data-container='body'
+                    <button type="button" (click)="toggleScroll()" class="btn btn-sm btn-default" data-container='body'
                         data-toggle="tooltip" data-placement="bottom" title="Stack Scroll"><span class="fa fa-bars"></span></button>
                     <!-- Play clip -->
                     <button type="button" *ngIf="enablePlayTools" (click)="playClip()" class="btn btn-sm btn-default"

@@ -25,20 +25,18 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
   public hospital = ''; // current image Institution name, to display on the overlay
   public instanceNumber = ''; // current image Instance #, to display on the overlay
 
+  public scrollEnabled = false;
+
   // cornersTone Tools we use
   private WwwcTool = cornerstoneTools.WwwcTool;
   private PanTool = cornerstoneTools.PanTool;
   private ZoomTool = cornerstoneTools.ZoomTool;
-  private ProbeTool = cornerstoneTools.ProbeTool;
   private LengthTool = cornerstoneTools.LengthTool;
-  private AngleTool = cornerstoneTools.AngleTool;
-  private EllipticalRoiTool = cornerstoneTools.EllipticalRoiTool;
   private RectangleRoiTool = cornerstoneTools.RectangleRoiTool;
-  private DragProbeTool = cornerstoneTools.DragProbeTool;
   private ZoomTouchPinchTool = cornerstoneTools.ZoomTouchPinchTool;
   private PanMultiTouchTool = cornerstoneTools.PanMultiTouchTool;
   private StackScrollTool = cornerstoneTools.StackScrollTool;
-  private StackScrollMouseWheelTool = cornerstoneTools.StackScrollMouseWheelTools;
+
 
   public get windowingValue(): string {
     if (this.isCornerstoneEnabled) {
@@ -70,14 +68,13 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
 
   @HostListener('wheel', ['$event'])
   onMouseWheel(event) {
-    event.preventDefault();
+    //event.preventDefault();
 
-    if (this.imageList.length > 0) {
-      const delta = Math.max(-1, Math.min(1, (event.wheelDelta || -event.detail)));
-      // console.log(event);
+    if (this.imageList.length > 0 && this.scrollEnabled) {
+      //const delta = Math.max(-1, Math.min(1, (event.wheelDelta || -event.detail)));
+      //console.log(event);
 
-
-      if (delta > 0) {
+      if (event.deltaY > 0) {
         this.currentIndex++;
         if (this.currentIndex >= this.imageList.length) {
           this.currentIndex = this.imageList.length - 1;
@@ -97,7 +94,6 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
   }
 
   ngOnInit() {
-
     // Retrieve the DOM element itself
     this.element = this.elementRef.nativeElement;
 
@@ -110,16 +106,11 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
     cornerstoneTools.addTool(this.WwwcTool);
     cornerstoneTools.addTool(this.PanTool);
     cornerstoneTools.addTool(this.ZoomTool);
-    cornerstoneTools.addTool(this.ProbeTool);
     cornerstoneTools.addTool(this.LengthTool);
-    cornerstoneTools.addTool(this.AngleTool);
-    cornerstoneTools.addTool(this.EllipticalRoiTool);
     cornerstoneTools.addTool(this.RectangleRoiTool);
-    cornerstoneTools.addTool(this.DragProbeTool);
     cornerstoneTools.addTool(this.ZoomTouchPinchTool);
     cornerstoneTools.addTool(this.PanMultiTouchTool);
     cornerstoneTools.addTool(this.StackScrollTool);
-    cornerstoneTools.addTool(this.StackScrollMouseWheelTool);
 
     // Enable the element with Cornerstone
     this.resetViewer();
@@ -178,6 +169,10 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
     }
   }
 
+  public toggleScroll() {
+    this.scrollEnabled = !this.scrollEnabled;
+  }
+
   public addImageData(imageData: any) {
     this.element = this.elementRef.nativeElement;
     //if (!this.imageList.filter(img => img.imageId === imageData.imageId).length) {
@@ -213,9 +208,8 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
     // cornerstoneTools.keyboardInput.enable(this.element);
 
     // Enable all tools we want to use with this element
-    cornerstoneTools.setToolActiveForElement(this.element, 'Wwwc', { mouseButtonMask: 1 }, ['Mouse']); // ww/wc is the default tool for left mouse button
-    cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 4 }, ['Mouse']); // pan is the default tool for middle mouse button
-    cornerstoneTools.setToolActiveForElement(this.element, 'Zoom', { mouseButtonMask: 2 }, ['Mouse']); // zoom is the default tool for right mouse button
+    cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 1 }, ['Mouse']); // pan is the default tool for left mouse button
+    cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 2 }, ['Mouse']); // pan is the default tool for left mouse button
 
     /*     cornerstoneTools.wwwc.activate(this.element, 1); // ww/wc is the default tool for left mouse button
         cornerstoneTools.pan.activate(this.element, 2); // pan is the default tool for middle mouse button
@@ -266,6 +260,6 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
     cornerstoneTools.setToolDisabledForElement(this.element, 'PanMultiTouch');
     cornerstoneTools.setToolDisabledForElement(this.element, 'StackScroll');
     cornerstoneTools.setToolDisabledForElement(this.element, 'StackScrollMouseWheel');
-    }
+  }
 
 }
