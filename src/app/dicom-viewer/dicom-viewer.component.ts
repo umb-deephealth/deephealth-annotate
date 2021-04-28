@@ -284,7 +284,7 @@ public download(filename, text) {
   public enableElliptical() {
     if (this.imageCount > 0) {
       var Rois = new Array("RectangleRoi", "Length");
-      var toolString = "";
+      var toolArray = new Array()
       //this.resetAllTools();
       // cornerstoneTools.ellipticalRoi.activate(this.element, 1);
       //cornerstoneTools.setToolActiveForElement(this.element, 'EllipticalRoi', { mouseButtonMask: 1 }, ['Mouse']);
@@ -292,10 +292,10 @@ public download(filename, text) {
       Rois.forEach(element => {
         var tooldata = cornerstoneTools.getToolState(this.element, element)
         if (tooldata != undefined) {
-          toolString += JSON.stringify(tooldata) + "\n\n" 
+          toolArray.push(tooldata) 
         }
     });
-    this.download("Annotations", toolString);
+    this.download("Annotations", JSON.stringify(toolArray));
    //this.resetAllTools();
   }
 }
