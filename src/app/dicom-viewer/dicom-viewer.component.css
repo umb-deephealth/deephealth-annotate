@@ -12,6 +12,8 @@
 .btn-default:hover {
     background-color: #888888;
     color: rgb(211, 34, 81);
+    border: double 2px;
+    border-color: #868686;
 }
 
 .thumbnailSelector {

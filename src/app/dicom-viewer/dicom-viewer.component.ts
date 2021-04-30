@@ -39,6 +39,16 @@ export class DICOMViewerComponent implements OnInit {
   // control exhibition of a loading images progress indicator
   public loadingImages = false;
   public get showProgress(): any { return { display: (this.loadingImages) ? 'inline-block' : 'none' } };
+  
+  // control styling of a button that can be toggled on/off
+  public get showButtonToggleEnabled(): any { 
+    if (this.viewPort.scrollEnabled) { 
+      return { 'color': 'rgb(211, 34, 81)', 'border-color': 'rgb(211, 34, 81)', 'border-style': 'inset' }; 
+    } 
+    else {
+      return { 'color': 'white', 'border-color': '#868686' };
+    }
+  };
 
   @ViewChild(CornerstoneDirective, { static: true }) viewPort: CornerstoneDirective; // the main cornerstone viewport
   @ViewChildren(ThumbnailDirective) thumbnails: Array<ThumbnailDirective>;
@@ -252,6 +262,7 @@ export class DICOMViewerComponent implements OnInit {
 
   public toggleScroll() {
     this.viewPort.toggleScroll();
+
     //cornerstoneTools.setToolActiveForElement(this.element, 'StackScroll', { mouseButtonMask: 1 }, ['Mouse']);
   }
 
