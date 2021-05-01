@@ -1,6 +1,6 @@
 <!-- Main Content -->
 <div style="height:100%; width: 100%;">
-  <div style="display: flex; height: calc(100% - 90px); width:100%; margin-top: 3.6em;">
+  <div style="display: flex; height: calc(100% - 60px); width:100%; margin-top: 3.3em;">
     <dicom-viewer [enableViewerTools]="true" [enablePlayTools]="true" [maxImagesToLoad]="1000000" 
     style="height:100%; width:100%; margin: 1px; border: 2px solid #1a1a1a; font-size: 16px;"></dicom-viewer>
   </div>
@@ -22,7 +22,7 @@
     <input class="hide_file" type="file" multiple accept="application/dicom" id="images" title="Select your images"
     (change)="loadDICOMImages($event.target.files)">
   </div>
-  <button mat-icon-button (click)="openDialog()" disableRipple style="margin: 10px; color: white;"><mat-icon>help_outline</mat-icon></button>
+  <button mat-icon-button (click)="openDialog()" style="margin: 10px; color: white;"><mat-icon>help_outline</mat-icon></button>
 </div>
 
 

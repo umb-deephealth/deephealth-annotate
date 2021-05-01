@@ -43,7 +43,7 @@ export class DICOMViewerComponent implements OnInit {
   // control styling of a button that can be toggled on/off
   public get showButtonToggleEnabled(): any { 
     if (this.viewPort.scrollEnabled) { 
-      return { 'color': 'rgb(211, 34, 81)', 'border-color': 'rgb(211, 34, 81)', 'border-style': 'inset' }; 
+      return { 'color': 'rgb(211, 34, 81)', 'border-color': 'whitesmoke', 'border-style': 'inset' }; 
     } 
     else {
       return { 'color': 'white', 'border-color': '#868686' };
