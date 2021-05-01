@@ -1,0 +1,109 @@
+<h1 mat-dialog-title><img
+  width="190"
+  alt="DeepHealth Logo"
+  src="assets/svg/deephealth.svg"
+  style="margin-top: 0.25%"
+/> DICOM Annotation Tool</h1>
+<mat-dialog-content class="mat-typography">
+  <h1>Overview</h1>
+  <p style="border-bottom: #696969 1px inset; padding-bottom: 2%;">The DeepHealth Annotate DICOM Image Annotation Tool is a web-based platform for viewing and
+    annotating DICOM files. 
+    <br><br>
+    Tools are included for rectangular box and length measurement type annotations. The annotation 
+    metadata can then be exported as a .JSON file, which is intended to be parsed and used as training input for
+    deep learning models, so that algorithms can more accurately identify these regions of interest within similar
+    images in the future.
+    <br><br>
+    You can get started by clicking the "<i>Choose DICOM Files</i>" button in the top-right corner of the screen and
+    then browsing to select all of the desired DICOM files to import from your local machine. If you wish to
+    learn more about the viewer and annotation tools available, please continue reading below.
+  </p>
+
+  <br>
+  <h1>Annotation Tools</h1>
+  <span class="far fa-square" style="font-size: 20pt;"></span>
+  <h4>Rectangle ROI</h4>
+  <p>This tool allows panning around the current active image using the left mouse button. Pan is
+    also possible using the right mouse button while any other tool is active.</p>
+  <br>
+  <span class="fas fa-ruler-horizontal" style="font-size: 20pt;"></span>
+  <h4>Length</h4>
+  <p style="border-bottom: #696969 1px inset; padding-bottom: 2%;">This tool allows panning around the current active image using the left mouse button. Pan is
+    also possible using the right mouse button while any other tool is active.</p>
+
+  <br>
+  <h1>View Tools</h1>
+  <span class="fa fa-arrows-alt" style="font-size: 20pt;"></span>
+  <h4>Pan</h4>
+  <p>This tool allows panning around the current active image using the left mouse button. Pan is
+    also possible using the right mouse button while any other tool is active.</p>
+  <br>
+  <span class="fas fa-search-plus" style="font-size: 20pt;"></span>
+  <h4>Zoom</h4>
+  <p>This tool allows panning around the current active image using the left mouse button. Pan is
+    also possible using the right mouse button while any other tool is active.</p>
+  <br>
+  <span class="fa fa-sun" style="font-size: 20pt;"></span>
+  <h4>Windowing</h4>
+  <p>This tool allows panning around the current active image using the left mouse button. Pan is
+    also possible using the right mouse button while any other tool is active.</p>
+  <br>
+  <span class="fa fa-adjust" style="font-size: 20pt;"></span>
+  <h4>Invert</h4>
+  <p>This tool allows panning around the current active image using the left mouse button. Pan is
+    also possible using the right mouse button while any other tool is active.</p>
+  <br>
+  <span class="fas fa-trash-alt" style="font-size: 20pt;"></span>
+  <h4>Reset Image</h4>
+  <p>This tool allows panning around the current active image using the left mouse button. Pan is
+    also possible using the right mouse button while any other tool is active.</p>
+  <br>
+  <span class="fa fa-backward" style="font-size: 20pt;"></span>
+  <h4>Previous Image</h4>
+  <p>This tool allows panning around the current active image using the left mouse button. Pan is
+    also possible using the right mouse button while any other tool is active.</p>
+  <br>
+  <span class="fa fa-forward" style="font-size: 20pt;"></span>
+  <h4>Next Image</h4>
+  <p>This tool allows panning around the current active image using the left mouse button. Pan is
+    also possible using the right mouse button while any other tool is active.</p>
+  <br>
+  <span class="fa fa-bars" style="font-size: 20pt;"></span>
+  <h4>Toggle Stack Scroll</h4>
+  <p>This tool allows panning around the current active image using the left mouse button. Pan is
+    also possible using the right mouse button while any other tool is active.</p>
+  <br>
+  <span class="fa fa-play" style="font-size: 20pt;"></span>
+  <h4>Play Clip</h4>
+  <p>This tool allows panning around the current active image using the left mouse button. Pan is
+    also possible using the right mouse button while any other tool is active.</p>
+  <br>
+  <span class="fa fa-stop" style="font-size: 20pt;"></span>
+  <h4>Stop Clip</h4>
+  <p style="border-bottom: #696969 1px inset; padding-bottom: 2%;">This tool allows panning around the current active image using the left mouse button. Pan is
+    also possible using the right mouse button while any other tool is active.</p>
+      
+  <br>
+  <h1>Exporting</h1>
+  <span class="fa fa-download" style="font-size: 20pt;"></span>
+  <h4>Download Annotation Data</h4>
+  <p style="border-bottom: #696969 1px inset; padding-bottom: 2%;">This tool allows panning around the current active image using the left mouse button. Pan is
+    also possible using the right mouse button while any other tool is active.<br><br>
+    The format is:<br>
+  <code>{{'{'}} "width":76,<br>
+    "height":25,<br>
+    "left":984,<br>
+    "top":353,<br>
+    "uuid":"a084819e-f470-4477-af32-4a3d8a71b008",<br>
+    "length":52,<br>
+    "unit":"mm" {{'}'}}</code></p>
+
+  <br>
+  <h1>Source &amp; Contributing</h1>
+  <p>This project is provided open-source (MIT license) and your contributions are welcome! Please visit our 
+    <a aria-label="Project GitHub" target="_blank" rel="noopener" href="https://github.com/umb-deephealth/deephealth-annotate" title="Project GitHub">GitHub</a>
+   repository for more information.</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button style="margin-right: 1%;" mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>
