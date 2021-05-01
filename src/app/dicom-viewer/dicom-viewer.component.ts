@@ -38,7 +38,7 @@ export class DICOMViewerComponent implements OnInit {
 
   // control exhibition of a loading images progress indicator
   public loadingImages = false;
-  public get showProgress(): any { return { display: (this.loadingImages) ? 'inline-block' : 'none' } };
+  public get showProgress(): any { return { display: (this.loadingImages) ? 'inline' : 'none' } };
   
   // control styling of a button that can be toggled on/off
   public get showButtonToggleEnabled(): any { 
