@@ -21,7 +21,7 @@ html, body {
 .custom-modalbox { /* Global override for MatDialog style */
   mat-dialog-container {
     background-color: #0a0a0a;
-    border: #888888 1px outset;
+    border: #696969 1px outset;
   }
 
   .mat-dialog-content {
@@ -51,5 +51,9 @@ html, body {
   button {
     background-color: white;
     color: black;
+  }
+
+  a {
+    color:rgb(0, 132, 255);
   }
 }

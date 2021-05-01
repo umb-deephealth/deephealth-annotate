@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
   openDialog() {
     const dialogRef = this.dialog.open(InfoDialogComponent, {
       panelClass: 'custom-modalbox',
-      autoFocus: true
+      autoFocus: false
     });
     
     dialogRef.afterClosed().subscribe(result => {
