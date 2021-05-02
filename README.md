@@ -46,7 +46,7 @@ Thanks to all of our contributors:
 This project follows the [all-contributors][all-contributors] specification.
 Contributions of any kind welcome!
 
-## LICENSE
+## License
 
 [MIT](LICENSE)
 
