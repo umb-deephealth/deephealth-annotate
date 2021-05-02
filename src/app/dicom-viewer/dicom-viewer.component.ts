@@ -25,6 +25,7 @@ export class DICOMViewerComponent implements OnInit {
   public imageCount = 0; // total image count being viewed
 
   public LastUpdatedElement;
+  public annotationsList = []; 
 
 
   // control message for more images to load
@@ -230,6 +231,7 @@ export class DICOMViewerComponent implements OnInit {
       cornerstoneTools.setToolActiveForElement(this.element, 'Length', { mouseButtonMask: 1 }, ['Mouse']);
       cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 2 }, ['Mouse']); // pan right mouse
       this.LastUpdatedElement = 'Length'
+      this.annotationsList.push('Length');
     }
   }
   // activate angle measurement
@@ -249,7 +251,6 @@ export class DICOMViewerComponent implements OnInit {
   }
 
   // activate Elliptical ROI
-  // from Sahmeer's branch: this method is used to download tool data (a new method name is not recognized in dicom-viewer.component.html)
   public saveToolState() {
     if (this.imageCount > 0) {
       var Rois = new Array("RectangleRoi", "Length");
@@ -280,6 +281,7 @@ export class DICOMViewerComponent implements OnInit {
       cornerstoneTools.setToolActiveForElement(this.element, 'RectangleRoi', { mouseButtonMask: 1 }, ['Mouse']);
       cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 2 }, ['Mouse']); // pan right mouse
       this.LastUpdatedElement = 'RectangleRoi';
+      this.annotationsList.push('RectangleRoi');
     }
   }
 
@@ -315,7 +317,19 @@ export class DICOMViewerComponent implements OnInit {
   }
 
   // Undo Last Annotation
+  /*
+  This method currently removes all annotations from the last used tool. 
+  Example: if the user used the Length tool twice, followed by the RectangleROI tool twice, and then 
+  clicks "Undo", this method will clear both of the rectangle annotations. If the user clicks undo again,
+  this method will clear both of the length annotations.
+  */
   public undoAnnotation() {
+//    cornerstoneTools.clearToolState(this.element, this.LastUpdatedElement);
+  //  cornerstoneTools.setToolDisabledForElement(this.element, this.LastUpdatedElement);
+  let popped = this.annotationsList.pop();
+  cornerstoneTools.clearToolState(this.element, popped);
+  cornerstoneTools.setToolDisabledForElement(this.element, popped);
+  this.viewPort.displayImage(this.viewPort.imageList[this.viewPort.currentIndex]);
 
   }
 
@@ -335,8 +349,9 @@ export class DICOMViewerComponent implements OnInit {
         this.resetAllTools();
         this.viewPort.displayImage(this.viewPort.imageList[this.viewPort.currentIndex]);
       } 
-    }
+    } 
   }
+
 
 
   public clearImage() {
