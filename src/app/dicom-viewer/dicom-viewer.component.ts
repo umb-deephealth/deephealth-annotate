@@ -24,7 +24,7 @@ export class DICOMViewerComponent implements OnInit {
   public currentSeries: any = {};
   public imageCount = 0; // total image count being viewed
 
-  public LastUpdatedElement;
+  public LastUpdatedElement; // since we're using annotationsList for undoing annotations, this may not be needed
   public annotationsList = []; 
 
 
@@ -250,23 +250,28 @@ export class DICOMViewerComponent implements OnInit {
     }
   }
 
-  // activate Elliptical ROI
+  // save tool states - download annotation data for all images
   public saveToolState() {
+
     if (this.imageCount > 0) {
       var Rois = new Array("RectangleRoi", "Length");
       var toolArray = new Array()
 
-      Rois.forEach(element => {
-        var tooldata = cornerstoneTools.getToolState(this.element, element)
-        if (tooldata != undefined) {
-          toolArray.push(tooldata) 
-        }
+      this.loadedImages.forEach(image => {
+
+        Rois.forEach(element => {
+          var tooldata = cornerstoneTools.getToolState(this.element, element)
+          if (tooldata != undefined) {
+            toolArray.push(tooldata)
+          }
+        });
       });
     }
-    
+
     this.download("Annotations", JSON.stringify(toolArray));
   }
 
+  // This method may be unused
   public enableElliptical() {
     var allPageArrays = new Array()
     this.loadedImages.forEach(element => {
