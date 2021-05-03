@@ -13,7 +13,6 @@ declare const cornerstoneTools;
   styleUrls: ['./dicom-viewer.component.css']
 })
 export class DICOMViewerComponent implements OnInit {
-
   @Input() public enableViewerTools = false; // enable viewer tools
   @Input() public enablePlayTools = false; // enable Play Clip tools
   @Input() public downloadImagesURL = '' // download images URL
@@ -24,8 +23,25 @@ export class DICOMViewerComponent implements OnInit {
   public currentSeries: any = {};
   public imageCount = 0; // total image count being viewed
 
-  public LastUpdatedElement;
+  public LastUpdatedElement; // since we're using annotationsList for undoing annotations, this may not be needed
+  public annotationsList = []; 
 
+  @ViewChild(CornerstoneDirective, { static: true }) viewPort: CornerstoneDirective; // the main cornerstone viewport
+  @ViewChildren(ThumbnailDirective) thumbnails: Array<ThumbnailDirective>;
+
+  private loadedImages = [];
+  private imageIdList = [];
+  private element: any;
+  private targetImageCount = 0;
+
+
+  constructor() { }
+
+
+  ngOnInit() {
+    this.element = this.viewPort.element;
+  }
+  
 
   // control message for more images to load
   public get moreImagestoLoad(): string {
@@ -38,7 +54,7 @@ export class DICOMViewerComponent implements OnInit {
   // control exhibition of a loading images progress indicator
   public loadingImages = false;
   public get showProgress(): any { return { display: (this.loadingImages) ? 'inline' : 'none' } };
-  
+
   // control styling of a button that can be toggled on/off
   public get showButtonToggleEnabled(): any { 
     if (this.viewPort.scrollEnabled) { 
@@ -49,20 +65,7 @@ export class DICOMViewerComponent implements OnInit {
     }
   };
 
-  @ViewChild(CornerstoneDirective, { static: true }) viewPort: CornerstoneDirective; // the main cornerstone viewport
-  @ViewChildren(ThumbnailDirective) thumbnails: Array<ThumbnailDirective>;
 
-  private loadedImages = [];
-  private imageIdList = [];
-  private element: any;
-  private targetImageCount = 0;
-
-  constructor() { }
-
-  ngOnInit() {
-    this.element = this.viewPort.element;
-  }
- 
   /**
    * Load dicom images for display
    *
@@ -88,6 +91,7 @@ export class DICOMViewerComponent implements OnInit {
     }
   }
 
+
   public download(filename, text) {
     var element = document.createElement('a');
     element.setAttribute('href', 'data:text/json;charset=utf-8,' + encodeURIComponent(text));
@@ -100,6 +104,7 @@ export class DICOMViewerComponent implements OnInit {
 
     document.body.removeChild(element);
   }
+
 
   /**
    *
@@ -150,6 +155,7 @@ export class DICOMViewerComponent implements OnInit {
 
   }
 
+
   public showSeries(index) {
     this.currentSeriesIndex = index;
     this.currentSeries = this.seriesList[index];
@@ -162,6 +168,7 @@ export class DICOMViewerComponent implements OnInit {
     }
   }
 
+
   /**
    * Image scroll methods
    */
@@ -171,16 +178,17 @@ export class DICOMViewerComponent implements OnInit {
     }
   }
 
+
   public previousImage() {
     if (this.viewPort.currentIndex > 0) {
       this.viewPort.previousImage();
     }
   }
 
+
   /**
    * Methods to activate/deactivate viewer tools
    */
-
   // deactivate all tools
   public resetAllTools() {
     if (this.imageCount > 0) {
@@ -188,6 +196,7 @@ export class DICOMViewerComponent implements OnInit {
       this.stopClip();
     }
   }
+
 
   // activate windowing
   public enableWindowing() {
@@ -197,6 +206,7 @@ export class DICOMViewerComponent implements OnInit {
     }
   }
 
+
   // activate zoom
   public enableZoom() {
     if (this.imageCount > 0) {
@@ -204,6 +214,7 @@ export class DICOMViewerComponent implements OnInit {
       cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 2 }, ['Mouse']); // pan right mouse
     }
   }
+
 
   // activate pan
   public enablePan() {
@@ -213,6 +224,7 @@ export class DICOMViewerComponent implements OnInit {
     }
   }
 
+
   // activate image scroll
   public enableScroll() {
     if (this.imageCount > 0) {
@@ -220,9 +232,11 @@ export class DICOMViewerComponent implements OnInit {
     }
   }
 
+
   public toggleScroll() {
     this.viewPort.toggleScroll();
   }
+
 
   // activate length measurement
   public enableLength() {
@@ -230,49 +244,32 @@ export class DICOMViewerComponent implements OnInit {
       cornerstoneTools.setToolActiveForElement(this.element, 'Length', { mouseButtonMask: 1 }, ['Mouse']);
       cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 2 }, ['Mouse']); // pan right mouse
       this.LastUpdatedElement = 'Length'
-    }
-  }
-  // activate angle measurement
-  public enableAngle() {
-    if (this.imageCount > 0) {
-      cornerstoneTools.setToolActiveForElement(this.element, 'Angle', { mouseButtonMask: 1 }, ['Mouse']);
-      cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 2 }, ['Mouse']); // pan right mouse
+      this.annotationsList.push('Length');
     }
   }
 
-  // activate pixel probe
-  public enableProbe() {
-    if (this.imageCount > 0) {
-      cornerstoneTools.setToolActiveForElement(this.element, 'Probe', { mouseButtonMask: 1 }, ['Mouse']);
-      cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 2 }, ['Mouse']); // pan right mouse
-    }
-  }
 
-  // activate Elliptical ROI
-  // from Sahmeer's branch: this method is used to download tool data (a new method name is not recognized in dicom-viewer.component.html)
+  // save tool states - download annotation data for all images
   public saveToolState() {
+
     if (this.imageCount > 0) {
       var Rois = new Array("RectangleRoi", "Length");
       var toolArray = new Array()
 
-      Rois.forEach(element => {
-        var tooldata = cornerstoneTools.getToolState(this.element, element)
-        if (tooldata != undefined) {
-          toolArray.push(tooldata) 
-        }
+      this.loadedImages.forEach(image => {
+
+        Rois.forEach(element => {
+          var tooldata = cornerstoneTools.getToolState(this.element, element)
+          if (tooldata != undefined) {
+            toolArray.push(tooldata)
+          }
+        });
       });
     }
-    
+
     this.download("Annotations", JSON.stringify(toolArray));
   }
 
-  public enableElliptical() {
-    var allPageArrays = new Array()
-    this.loadedImages.forEach(element => {
-      //allPageArrays.push(this.onePageReturn())
-    });
-    this.download("Annotations", JSON.stringify(allPageArrays));
-  }
 
   // activate Rectangle ROI
   public enableRectangle() {
@@ -280,8 +277,10 @@ export class DICOMViewerComponent implements OnInit {
       cornerstoneTools.setToolActiveForElement(this.element, 'RectangleRoi', { mouseButtonMask: 1 }, ['Mouse']);
       cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 2 }, ['Mouse']); // pan right mouse
       this.LastUpdatedElement = 'RectangleRoi';
+      this.annotationsList.push('RectangleRoi');
     }
   }
+
 
   // Play Clip
   public playClip() {
@@ -299,10 +298,12 @@ export class DICOMViewerComponent implements OnInit {
     }
   }
 
+
   // Stop Clip
   public stopClip() {
     cornerstoneTools.stopClip(this.element);
   }
+
 
   // invert image
   public invertImage() {
@@ -314,10 +315,24 @@ export class DICOMViewerComponent implements OnInit {
     }
   }
 
+
   // Undo Last Annotation
+  /*
+  This method currently removes all annotations from the last used tool. 
+  Example: if the user used the Length tool twice, followed by the RectangleROI tool twice, and then 
+  clicks "Undo", this method will clear both of the rectangle annotations. If the user clicks undo again,
+  this method will clear both of the length annotations.
+  */
   public undoAnnotation() {
+  //  cornerstoneTools.clearToolState(this.element, this.LastUpdatedElement);
+  //  cornerstoneTools.setToolDisabledForElement(this.element, this.LastUpdatedElement);
+  let popped = this.annotationsList.pop();
+  cornerstoneTools.clearToolState(this.element, popped);
+  cornerstoneTools.setToolDisabledForElement(this.element, popped);
+  this.viewPort.displayImage(this.viewPort.imageList[this.viewPort.currentIndex]);
 
   }
+
 
   // reset image
   public resetImage() {
@@ -335,7 +350,7 @@ export class DICOMViewerComponent implements OnInit {
         this.resetAllTools();
         this.viewPort.displayImage(this.viewPort.imageList[this.viewPort.currentIndex]);
       } 
-    }
+    } 
   }
 
 
