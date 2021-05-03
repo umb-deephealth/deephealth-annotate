@@ -61,7 +61,7 @@ export class DICOMViewerComponent implements OnInit {
       return { 'color': 'rgb(211, 34, 81)', 'border-color': 'whitesmoke', 'border-style': 'inset' }; 
     } 
     else {
-      return { 'color': 'white', 'border-color': '#868686' };
+      return { 'color': 'white', 'border-color': '#888888' };
     }
   };
 
