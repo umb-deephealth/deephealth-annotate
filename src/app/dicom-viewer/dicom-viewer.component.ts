@@ -363,3 +363,53 @@ export class DICOMViewerComponent implements OnInit {
     this.imageCount = 0; // total image count being viewed
   }
 }
+
+import hotkeys from 'hotkeys-js'
+
+hotkeys('ctrl+p,ctrl+o,ctrl+w,ctrl+i,ctrl+r,ctrl+l,ctrl+s,ctrl+z,ctrl+esc,left,right,up,down,space', function(event, handler){
+  event.preventDefault();
+  switch(handler.key) {
+    case 'ctrl+p':
+      document.getElementById('pan_bttn').click();
+      break;
+    case 'ctrl+o':
+      document.getElementById('zoom_bttn').click();
+      break;
+    case 'ctrl+w':
+      document.getElementById('windowing_bttn').click();
+      break;
+    case 'ctrl+i':
+      document.getElementById('invert_bttn').click();
+      break;
+    case 'ctrl+r':
+      document.getElementById('rectangleroi_bttn').click();
+      break;
+    case 'ctrl+l': 
+      document.getElementById('length_bttn').click();
+      break;
+    case 'ctrl+s':
+      document.getElementById('export_bttn').click();
+      break;
+    case 'ctrl+z':
+      document.getElementById('undo_bttn').click();
+      break;
+    case 'ctrl+esc':
+      document.getElementById('reset_bttn').click();
+      break;
+    case 'left':
+    case 'down':
+      document.getElementById('previous_image_bttn').click();
+      break;
+    case 'right':
+    case 'up':
+      document.getElementById('next_image_bttn').click();
+      break;
+    case 'space':
+      // todo: toggle play functionality
+      console.log('space pressed')
+      break;
+    case 'ctrl+u':
+      document.getElementById('stackscroll_bttn').click();
+      break;
+  }
+})
