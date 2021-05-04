@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { InfoDialogComponent } from './info-dialog/info-dialog.component'
 import { DICOMViewerComponent } from './dicom-viewer/dicom-viewer.component';
 
 declare const cornerstone;
@@ -12,6 +14,8 @@ declare const cornerstoneWADOImageLoader;
 export class AppComponent implements OnInit {
   @ViewChild(DICOMViewerComponent, { static: true }) viewPort: DICOMViewerComponent;
 
+  constructor(public dialog: MatDialog) {}
+
   ngOnInit() {
     cornerstoneWADOImageLoader.external.cornerstone = cornerstone;
     cornerstoneWADOImageLoader.webWorkerManager.initialize({
@@ -21,6 +25,17 @@ export class AppComponent implements OnInit {
                 codecsPath: '../codecs/cornerstoneWADOImageLoaderCodecs.js'
             }
         }
+    });
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(InfoDialogComponent, {
+      panelClass: 'custom-modalbox',
+      autoFocus: false
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      //console.log(`Dialog result: ${result}`);
     });
   }
 

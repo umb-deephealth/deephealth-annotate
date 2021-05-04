@@ -1,6 +1,14 @@
+<!-- Main Content -->
+<div style="height:100%; width: 100%;">
+  <div style="display: flex; height: calc(100% - 60px); width:100%; margin-top: 3.3em;">
+    <dicom-viewer [enableViewerTools]="true" [enablePlayTools]="true" [maxImagesToLoad]="1000000" 
+    style="height:100%; width:100%; margin: 1px; border: 2px solid #1a1a1a; font-size: 16px;"></dicom-viewer>
+  </div>
+</div>
+
 <!-- Toolbar -->
 <div class="toolbar" role="banner">
-  <a aria-label="DeepHealth Home" target="_blank" rel="noopener" href="https://deep.health">
+  <a aria-label="DeepHealth Home" target="_blank" rel="noopener" href="https://deep.health" title="DeepHealth">
   <img
     width="170"
     alt="DeepHealth Logo"
@@ -9,14 +17,19 @@
   />
   </a>
   <div class="spacer"></div>
+<<<<<<< HEAD
   <!--<span style="padding-right: 1%;"><b>Welcome, </b> user</span>-->
+=======
+>>>>>>> main
   <div class="choose_file">
-    Choose Your DICOM Files
+    Choose DICOM Files
     <input class="hide_file" type="file" multiple accept="application/dicom" id="images" title="Select your images"
     (change)="loadDICOMImages($event.target.files)">
   </div>
+  <button mat-icon-button (click)="openDialog()" style="margin: 10px; color: white;"><mat-icon>help_outline</mat-icon></button>
 </div>
 
+<<<<<<< HEAD
 <!-- Main Content -->
 <div style="height:100%; width: 100%;">
   <div style="display: flex; height: calc(100% - 50px); width:100%; margin-top: 3em;">
@@ -26,5 +39,7 @@
 </div>
 
 
+=======
+>>>>>>> main
 
 <router-outlet></router-outlet>

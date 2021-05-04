@@ -29,6 +29,7 @@
 
 .toolbar img {
   margin: 0 6px;
+<<<<<<< HEAD
   transition: ease 0.9s;
   opacity: 1s;
 }
@@ -41,18 +42,29 @@
 .choose_file:hover {
   transition: ease, 0.5s;
   opacity: 0.4;
+=======
+  opacity: 1;
+  transition: opacity .2s ease-out;
+  -moz-transition: opacity .2s ease-out;
+  -webkit-transition: opacity .2s ease-out;
+  -o-transition: opacity .2s ease-out;
+}
+
+.toolbar img:hover {
+  opacity: 0.6;
+>>>>>>> main
 }
 
 .choose_file {
   padding: 5px 10px;
   background: rgb(211, 34, 81);
-  border: 1px solid rgb(211, 34, 81);
   position: relative;
   color: #fff;
   border-radius: 2px;
   text-align: center;
   float: right;
   cursor: pointer;
+<<<<<<< HEAD
   margin-right: 16px;
   margin-bottom: 20px;
   margin-top: 1%;
@@ -63,6 +75,18 @@
 .hoverOpacity:hover {
   transition: ease, 0.5s;
   opacity: 0.4;
+=======
+  margin: 0 6px;
+  opacity: 1;
+  transition: opacity .2s ease-out;
+  -moz-transition: opacity .2s ease-out;
+  -webkit-transition: opacity .2s ease-out;
+  -o-transition: opacity .2s ease-out;
+}
+
+.choose_file:hover {
+  opacity: 0.6;
+>>>>>>> main
 }
 
 .hide_file {
