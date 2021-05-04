@@ -331,6 +331,7 @@ export class DICOMViewerComponent implements OnInit {
   cornerstoneTools.setToolDisabledForElement(this.element, popped);
   this.viewPort.displayImage(this.viewPort.imageList[this.viewPort.currentIndex]);
 
+
   }
 
 
