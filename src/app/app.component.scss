@@ -11,7 +11,7 @@
   flex: 1;
 }
 
-.toolbar {
+.toolbar { 
   position: absolute;
   top: 0;
   left: 0;
@@ -29,20 +29,6 @@
 
 .toolbar img {
   margin: 0 6px;
-<<<<<<< HEAD
-  transition: ease 0.9s;
-  opacity: 1s;
-}
-
-.toolbar img:hover {
-  transition: ease, 0.5s;
-  opacity: 0.4;
-}
-
-.choose_file:hover {
-  transition: ease, 0.5s;
-  opacity: 0.4;
-=======
   opacity: 1;
   transition: opacity .2s ease-out;
   -moz-transition: opacity .2s ease-out;
@@ -52,7 +38,6 @@
 
 .toolbar img:hover {
   opacity: 0.6;
->>>>>>> main
 }
 
 .choose_file {
@@ -64,18 +49,6 @@
   text-align: center;
   float: right;
   cursor: pointer;
-<<<<<<< HEAD
-  margin-right: 16px;
-  margin-bottom: 20px;
-  margin-top: 1%;
-  transition: ease, 0.9s;
-  opacity: 1;
-}
-
-.hoverOpacity:hover {
-  transition: ease, 0.5s;
-  opacity: 0.4;
-=======
   margin: 0 6px;
   opacity: 1;
   transition: opacity .2s ease-out;
@@ -86,7 +59,6 @@
 
 .choose_file:hover {
   opacity: 0.6;
->>>>>>> main
 }
 
 .hide_file {

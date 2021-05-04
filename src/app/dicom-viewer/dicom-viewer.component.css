@@ -16,6 +16,13 @@
     border-color: #868686;
 }
 
+.selectedTool:focus {
+    background-color: #040202 !important;
+    color: rgb(255, 144, 144) !important;
+    border: double 2px;
+    border-color: #868686;
+}
+
 .thumbnailSelector {
     width: 10%;
     float: left;

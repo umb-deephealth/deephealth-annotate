@@ -20,33 +20,27 @@
     <!-- container where image will be loaded -->
     <div style="overflow: hidden; width: 100%; height: 100%; background-color: #252525;">
         <!-- Toolbar -->
-<<<<<<< HEAD
-        <div style="border: 2px groove #2c2c2c;">
-            <a class="hoverOpacity">File</a> | <a class="hoverOpacity">Options</a>
-            <div class="btn-group" style="margin-left: 30%; margin-bottom: 2px; border: 1px solid #4b4b4b; border-style: inset;">
-=======
         <div style="border: 2px groove #2c2c2c; scrollbar-width: none;">  
             <!-- <a>File</a> | <a>Options</a> -->
             <div class="btn-group" style="margin-left: 32%; margin-bottom: 2px; border: 1px solid #4b4b4b; border-style: inset;">
->>>>>>> main
                 <div class="btn-group" *ngIf="enableViewerTools">
                     <!-- Pan -->
-                    <button type="button" (click)="enablePan()" class="btn btn-sm btn-default"
+                    <button type="button" (click)="enablePan()" class="btn btn-sm btn-default selectedTool"
                         data-container='body' data-toggle="tooltip" data-placement="bottom" title="Pan"><span class="fa fa-arrows-alt"></span></button>
                     <!-- Zoom -->
-                    <button type="button" (click)="enableZoom()" class="btn btn-sm btn-default"
+                    <button type="button" (click)="enableZoom()" class="btn btn-sm btn-default selectedTool"
                         data-container='body' data-toggle="tooltip" data-placement="bottom" title="Zoom"><span class="fas fa-search-plus"></span></button>
                     <!-- WW/WL -->
-                    <button type="button" (click)="enableWindowing()" class="btn btn-sm btn-default"
+                    <button type="button" (click)="enableWindowing()" class="btn btn-sm btn-default selectedTool"
                         data-container='body' data-toggle="tooltip" data-placement="bottom" title="Windowing"><span class="fa fa-sun"></span></button>
                     <!-- Invert -->
                     <button type="button" (click)="invertImage()" class="btn btn-sm btn-default" data-container='body'
                         data-toggle="tooltip" data-placement="bottom" title="Invert"><span class="fa fa-adjust"></span></button>
                     <!-- Rectangle ROI -->
-                    <button type="button" (click)="enableRectangle()" class="btn btn-sm btn-default"
+                    <button type="button" (click)="enableRectangle()" class="btn btn-sm btn-default selectedTool"
                         data-container='body' data-toggle="tooltip" data-placement="bottom" title="Rectangle ROI"><span class="far fa-square"></span></button>
                     <!-- Length measurement -->
-                    <button type="button" (click)="enableLength()" class="btn btn-sm btn-default"
+                    <button type="button" (click)="enableLength()" class="btn btn-sm btn-default selectedTool"
                         data-container='body' data-toggle="tooltip" data-placement="bottom" title="Length"><span class="fas fa-ruler-horizontal"></span></button>
                     <!-- Save data -->
                     <button type="button" (click)="saveToolState()" class="btn btn-sm btn-default" data-container='body'
