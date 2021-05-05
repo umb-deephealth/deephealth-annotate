@@ -4,8 +4,10 @@ import { InfoDialogComponent } from './info-dialog/info-dialog.component'
 import { DICOMViewerComponent } from './dicom-viewer/dicom-viewer.component';
 import hotkeys from 'hotkeys-js';
 
+
 declare const cornerstone;
 declare const cornerstoneWADOImageLoader;
+
 
 @Component({
   selector: 'app-root',
@@ -13,11 +15,14 @@ declare const cornerstoneWADOImageLoader;
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+
   @ViewChild(DICOMViewerComponent, { static: true }) viewPort: DICOMViewerComponent;
+
 
   constructor(public dialog: MatDialog) {}
 
   ngOnInit() {
+    // Initialize the cornerstoneWADOImageLoaderCodecs
     cornerstoneWADOImageLoader.external.cornerstone = cornerstone;
     cornerstoneWADOImageLoader.webWorkerManager.initialize({
         webWorkerPath: './assets/cornerstone/webworkers/cornerstoneWADOImageLoaderWebWorker.js',
@@ -28,6 +33,7 @@ export class AppComponent implements OnInit {
         }
     });
 
+    // Setup all Keyboard Shortcuts here
     hotkeys('p,z,w,i,r,l,alt+enter,u,esc,left,right,up,down,/,s', function(event, handler){
       event.preventDefault();
       document.getElementById("viewer").focus();
@@ -77,9 +83,11 @@ export class AppComponent implements OnInit {
     });
   }
 
+
   ngAfterViewChecked(): void {
     document.documentElement.focus();
   }
+
 
   openDialog() {
     const dialogRef = this.dialog.open(InfoDialogComponent, {
@@ -91,6 +99,13 @@ export class AppComponent implements OnInit {
       //console.log(`Dialog result: ${result}`);
     });
   }
+
+
+  // File drag & drop handler, $event contains an array of files
+  onFileDropped($event) {
+    this.loadDICOMImages($event);
+  }
+
 
   /**
    * Load selected DICOM images
