@@ -23,6 +23,7 @@
   <h1>Annotation Tools</h1>
   <span class="far fa-square" style="font-size: 20pt;"></span>
   <h4>Rectangle ROI</h4>
+  <h4>(Shortcut: R)</h4>
   <p>This button will enable the Rectangular Box Tool, which allows you to draw a box around a region of interest.
     With the tool enabled, click a point on the image to place the first corner of the box, then click again to place the opposite corner, and a
     box will be drawn for you.<br><br>
@@ -32,6 +33,7 @@
   <br>
   <span class="fas fa-ruler-horizontal" style="font-size: 20pt;"></span>
   <h4>Length</h4>
+  <h4>(Shortcut: L)</h4>
   <p style="border-bottom: #696969 1px inset; padding-bottom: 2%;">This button will enable the
     Length Measurement Tool, which allows you to draw a straight line on the image that includes automatically calculated length values. Simply
     click the point where you want the line to begin, then the end point, and the line will be drawn for you.
@@ -44,16 +46,19 @@
   <h1>View Tools</h1>
   <span class="fa fa-arrows-alt" style="font-size: 20pt;"></span>
   <h4>Pan</h4>
+  <h4>(Shortcut: P)</h4>
   <p>This button enables the Pan Tool, which allows panning around the current active image using the left mouse button. Pan is
     also possible by default by using the right mouse button while any other tool is active.</p>
   <br>
   <span class="fas fa-search-plus" style="font-size: 20pt;"></span>
   <h4>Zoom</h4>
+  <h4>(Shortcut: Z)</h4>
   <p>This button will enable the Zoom Tool, which allows you to adjust the zoom value of the current image using the left
     mouse button. With the tool chosen, click and drag along the viewer y-axis: Down to zoom in, up to zoom out.</p>
   <br>
   <span class="fa fa-sun" style="font-size: 20pt;"></span>
   <h4>Windowing</h4>
+  <h4>(Shortcut: W)</h4>
   <p>This button will enable the Windowing tool, which allows you to change the viewer's windowing 
     values using the left mouse button. With the tool chosen, click and drag along the viewer x-axis to increase
     or decrease the WW value (Window Width, also known as contrast), or along the y-axis to adjust the WL value (Window Level,
@@ -61,34 +66,46 @@
   <br>
   <span class="fa fa-adjust" style="font-size: 20pt;"></span>
   <h4>Invert</h4>
+  <h4>(Shortcut: I)</h4>
   <p>This button will invert the image colors.</p>
+  <br>
+  <span class="fas fa-undo" style="font-size: 20pt;"></span>
+  <h4>Undo Annotation</h4>
+  <h4>(Shortcut: U)</h4>
+  <p>This button will undo any annotations created with the last used tool.</p>
   <br>
   <span class="fas fa-trash-alt" style="font-size: 20pt;"></span>
   <h4>Reset Image</h4>
+  <h4>(Shortcut: Esc)</h4>
   <p>This button resets the current image to its initial state. This includes removing all annotations, as well as
     resetting zoom, windowing, and positioning.</p>
   <br>
   <span class="fa fa-backward" style="font-size: 20pt;"></span>
   <h4>Previous Image</h4>
+  <h4>(Shortcut: Left or Up arrows)</h4>
   <p>If a multi-frame image is selected in the viewer, this button will move to the previous frame in the stack.</p>
   <br>
   <span class="fa fa-forward" style="font-size: 20pt;"></span>
   <h4>Next Image</h4>
+  <h4>(Shortcut: Right or Down arrows)</h4>
   <p>If a multi-frame image is selected in the viewer, this button will move to the next frame in the stack.</p>
   <br>
   <span class="fa fa-bars" style="font-size: 20pt;"></span>
   <h4>Toggle Stack Scroll</h4>
+  <h4>(Shortcut: S)</h4>
   <p>Clicking this button will toggle the Stack Scroll tool on/off. Stack scrolling allows for
     moving through an image stack in a multi-frame DICOM file using the mousewheel: Down for next frame,
     up for previous frame.</p>
   <br>
   <span class="fa fa-play" style="font-size: 20pt;"></span>
   <h4>Play Clip</h4>
+  <h4>(Shortcut: /)</h4>
   <p>If a multi-frame image is selected in the viewer, this button will begin looping through the frames
     at a default 10 frames per second. Click "Stop Clip" to end the loop and return to static image viewing.</p>
   <br>
   <span class="fa fa-stop" style="font-size: 20pt;"></span>
   <h4>Stop Clip</h4>
+  <h4>(Shortcut: /)</h4>
   <p style="border-bottom: #696969 1px inset; padding-bottom: 2%;">If a multi-frame image is selected in the viewer and
     currently playing, this button will end the play loop and return you to static image viewing. </p>
       
@@ -96,6 +113,7 @@
   <h1>Exporting</h1>
   <span class="fa fa-download" style="font-size: 20pt;"></span>
   <h4>Download Annotation Data</h4>
+  <h4>(Shortcut: Alt+Enter)</h4>
   <p style="border-bottom: #696969 1px inset; padding-bottom: 2%;">This button exports all current annotations on any loaded images to a .JSON file. In the
     file, each DICOM image is represented as one JSON object containing any annotation metadata within that image as a set of key/value pairs. Therefore, the
     contents of the file is simply a list containing one of these objects for each image. See below for example JSON properties.<br><br>

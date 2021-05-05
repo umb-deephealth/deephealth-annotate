@@ -218,8 +218,11 @@ export class DICOMViewerComponent implements OnInit {
   // deactivate all tools
   public resetAllTools() {
     if (this.imageCount > 0) {
-      this.viewPort.resetAllTools()
-      this.stopClip();
+      this.selectedTool = this.toolList[0];
+      this.viewPort.resetAllTools();
+      if (this.viewPort.isClipPlaying) {
+        this.stopClip();
+      }
     }
   }
 
