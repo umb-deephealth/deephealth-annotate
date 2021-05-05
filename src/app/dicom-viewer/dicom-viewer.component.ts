@@ -24,7 +24,7 @@ export class DICOMViewerComponent implements OnInit {
   public imageCount = 0; // total image count being viewed
 
   public LastUpdatedElement; // since we're using annotationsList for undoing annotations, this may not be needed
-  public annotationsList = []; 
+  public annotationsList = []; // keep track of all tools/annotations used
 
   @ViewChild(CornerstoneDirective, { static: true }) viewPort: CornerstoneDirective; // the main cornerstone viewport
   @ViewChildren(ThumbnailDirective) thumbnails: Array<ThumbnailDirective>;
@@ -187,6 +187,7 @@ export class DICOMViewerComponent implements OnInit {
     this.currentSeries = this.seriesList[index];
     this.imageCount = this.currentSeries.imageCount; // get total image count
     this.viewPort.resetImageCache(); // clean up image cache
+    this.selectedTool = this.toolList[0]; // default tool is pan
 
     for (let i = 0; i < this.currentSeries.imageList.length; i++) {
       const imageData = this.currentSeries.imageList[i];
@@ -386,16 +387,12 @@ export class DICOMViewerComponent implements OnInit {
   public resetImage() {
     if (confirm("Are you sure you want to reset all annotations?") == true) {
       if (this.imageCount > 0) {
-        let toolStateManager = cornerstoneTools.getElementToolStateManager(this.element);
-        // Note that this only works on ImageId-specific tool state managers (for now)
-        //toolStateManager.clear(this.element);
         cornerstoneTools.clearToolState(this.element, "Length");
         cornerstoneTools.clearToolState(this.element, "Angle");
         cornerstoneTools.clearToolState(this.element, "Probe");
         cornerstoneTools.clearToolState(this.element, "EllipticalRoi");
         cornerstoneTools.clearToolState(this.element, "RectangleRoi");
-        cornerstone.updateImage(this.element);
-        this.resetAllTools();
+
         this.viewPort.displayImage(this.viewPort.imageList[this.viewPort.currentIndex]);
       } 
     } 
