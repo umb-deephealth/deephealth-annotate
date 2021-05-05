@@ -25,22 +25,22 @@
             <div class="btn-group" style="margin-left: 32%; margin-bottom: 2px; border: 1px solid #4b4b4b; border-style: inset;">
                 <div class="btn-group" *ngIf="enableViewerTools">
                     <!-- Pan -->
-                    <button type="button" (click)="enablePan()" class="btn btn-sm btn-default" id='pan_bttn'
+                    <button type="button" (click)="enablePan()" class="btn btn-sm btn-default selectedTool" id='pan_bttn'
                         data-container='body' data-toggle="tooltip" data-placement="bottom" title="Pan"><span class="fa fa-arrows-alt"></span></button>
                     <!-- Zoom -->
-                    <button type="button" (click)="enableZoom()" class="btn btn-sm btn-default" id='zoom_bttn'
+                    <button type="button" (click)="enableZoom()" class="btn btn-sm btn-default selectedTool" id='zoom_bttn'
                         data-container='body' data-toggle="tooltip" data-placement="bottom" title="Zoom"><span class="fas fa-search-plus"></span></button>
                     <!-- WW/WL -->
-                    <button type="button" (click)="enableWindowing()" class="btn btn-sm btn-default" id='windowing_bttn'
+                    <button type="button" (click)="enableWindowing()" class="btn btn-sm btn-default selectedTool" id='windowing_bttn'
                         data-container='body' data-toggle="tooltip" data-placement="bottom" title="Windowing"><span class="fa fa-sun"></span></button>
                     <!-- Invert -->
                     <button type="button" (click)="invertImage()" class="btn btn-sm btn-default" data-container='body' id='invert_bttn'
                         data-toggle="tooltip" data-placement="bottom" title="Invert"><span class="fa fa-adjust"></span></button>
                     <!-- Rectangle ROI -->
-                    <button type="button" (click)="enableRectangle()" class="btn btn-sm btn-default" id='rectangleroi_bttn'
+                    <button type="button" (click)="enableRectangle()" class="btn btn-sm btn-default selectedTool" id='rectangleroi_bttn'
                         data-container='body' data-toggle="tooltip" data-placement="bottom" title="Rectangle ROI"><span class="far fa-square"></span></button>
                     <!-- Length measurement -->
-                    <button type="button" (click)="enableLength()" class="btn btn-sm btn-default" id='length_bttn'
+                    <button type="button" (click)="enableLength()" class="btn btn-sm btn-default selectedTool" id='length_bttn'
                         data-container='body' data-toggle="tooltip" data-placement="bottom" title="Length"><span class="fas fa-ruler-horizontal"></span></button>
                     <!-- Save data -->
                     <button type="button" (click)="saveToolState()" class="btn btn-sm btn-default" data-container='body' id='export_bttn'
