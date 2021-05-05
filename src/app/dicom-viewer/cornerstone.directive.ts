@@ -19,16 +19,16 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
   private imageIdList = [];
   public currentIndex = 0;
   public currentImage: any;
-  public patientName = ''; // current image Patient name, do display on the overlay
+  public patientName = ''; // current image Patient name, to display on the overlay
   public hospital = ''; // current image Institution name, to display on the overlay
   public instanceNumber = ''; // current image Instance #, to display on the overlay
 
-  public scrollEnabled = false;
+  private scrollEnabled = false;
 
   private isCornerstoneEnabled = false;
   private clipPlaying = false;
   
-  // cornersTone Tools we use
+  // Cornerstone Tools we use
   private WwwcTool = cornerstoneTools.WwwcTool;
   private PanTool = cornerstoneTools.PanTool;
   private ZoomTool = cornerstoneTools.ZoomTool;
@@ -37,29 +37,6 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
   private ZoomTouchPinchTool = cornerstoneTools.ZoomTouchPinchTool;
   private PanMultiTouchTool = cornerstoneTools.PanMultiTouchTool;
   private StackScrollTool = cornerstoneTools.StackScrollTool;
-
-
-  public get windowingValue(): string {
-    if (this.isCornerstoneEnabled) {
-      let viewport = cornerstone.getViewport(this.element);
-      if (this.currentImage && viewport) { return Math.round(viewport.voi.windowWidth) + "/" + Math.round(viewport.voi.windowCenter); }
-    }
-    return '';
-  }
-
-
-  public get zoomValue(): string {
-    if (this.isCornerstoneEnabled) {
-      let viewport = cornerstone.getViewport(this.element);
-      if (this.currentImage && viewport) { return viewport.scale.toFixed(2); }
-    }
-    return '';
-  }
-
-
-  public get isClipPlaying(): boolean {
-    return this.clipPlaying;
-  }
 
 
   constructor(private elementRef: ElementRef) {
@@ -125,6 +102,35 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
   //  if (this.currentImage) cornerstone.resize(this.element, true);
   }
 
+
+  public get windowingValue(): string {
+    if (this.isCornerstoneEnabled) {
+      let viewport = cornerstone.getViewport(this.element);
+      if (this.currentImage && viewport) { return Math.round(viewport.voi.windowWidth) + "/" + Math.round(viewport.voi.windowCenter); }
+    }
+    return '';
+  }
+
+
+  public get zoomValue(): string {
+    if (this.isCornerstoneEnabled) {
+      let viewport = cornerstone.getViewport(this.element);
+      if (this.currentImage && viewport) { return viewport.scale.toFixed(2); }
+    }
+    return '';
+  }
+
+
+  public get isClipPlaying(): boolean {
+    return this.clipPlaying;
+  }
+
+
+  public get isScrollEnabled(): boolean {
+    return this.scrollEnabled;
+  }
+
+
   //
   // reset the viewer, so only this current element is enabled
   //
@@ -179,8 +185,18 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
   }
 
 
+  public refreshImage() {
+    this.displayImage(this.imageList[this.currentIndex]);
+  }
+
+
   public toggleScroll() {
     this.scrollEnabled = !this.scrollEnabled;
+  }
+
+
+  public togglePlayClip() {
+    this.clipPlaying = !this.clipPlaying;
   }
 
 
@@ -235,7 +251,7 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
     //cornerstoneTools.stackPrefetch.enable(this.element);
   }
 
-  
+
   // deactivate all tools
   public resetAllTools() {
     cornerstoneTools.setToolDisabledForElement(this.element, 'Wwwc');

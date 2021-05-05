@@ -56,8 +56,19 @@ export class DICOMViewerComponent implements OnInit {
 
   // control styling of a button that can be toggled on/off
   public get showButtonToggleEnabled(): any { 
-    if (this.viewPort.scrollEnabled) { 
+    if (this.viewPort.isScrollEnabled) { 
       return { 'color': 'rgb(211, 34, 81)', 'border-color': 'whitesmoke', 'border-style': 'inset' }; 
+    } 
+    else {
+      return { 'color': 'white', 'border-color': '#888888' };
+    }
+  };
+
+
+  // control styling of the Play/Stop button
+  public get showPlayStop(): any { 
+    if (this.viewPort.isClipPlaying) { 
+      return { 'border-color': 'whitesmoke', 'border-style': 'inset' }; 
     } 
     else {
       return { 'color': 'white', 'border-color': '#888888' };
@@ -151,7 +162,6 @@ export class DICOMViewerComponent implements OnInit {
     if (this.loadedImages.length >= this.targetImageCount) { // did we finish loading images?
       this.loadingImages = false; // deactivate progress indicator
     }
-
   }
 
 
@@ -172,14 +182,14 @@ export class DICOMViewerComponent implements OnInit {
    * Image scroll methods
    */
   public nextImage() {
-    if (this.viewPort.currentIndex < this.imageCount) {
+    if (this.viewPort.currentIndex < this.imageCount && !this.viewPort.isClipPlaying) {
       this.viewPort.nextImage();
     }
   }
 
 
   public previousImage() {
-    if (this.viewPort.currentIndex > 0) {
+    if (this.viewPort.currentIndex > 0 && !this.viewPort.isClipPlaying) {
       this.viewPort.previousImage();
     }
   }
@@ -232,7 +242,9 @@ export class DICOMViewerComponent implements OnInit {
 
 
   public toggleScroll() {
-    this.viewPort.toggleScroll();
+    if (!this.viewPort.isClipPlaying) {
+      this.viewPort.toggleScroll();
+    }
   }
 
 
@@ -280,9 +292,23 @@ export class DICOMViewerComponent implements OnInit {
   }
 
 
+  // Toggle clip playing
+  public togglePlay() {
+    if (this.viewPort.isClipPlaying) {
+      this.stopClip();
+    }
+    else {
+      this.playClip();
+    }
+  }
+
+  
   // Play Clip
   public playClip() {
     if (this.imageCount > 0) {
+      if (this.viewPort.isScrollEnabled) {
+        this.viewPort.toggleScroll();
+      }
       let frameRate = 10;
       let stackState = cornerstoneTools.getToolState(this.element, 'stack');
       if (stackState) {
@@ -292,6 +318,7 @@ export class DICOMViewerComponent implements OnInit {
           frameRate = 10;
         }
       }
+      this.viewPort.togglePlayClip();
       cornerstoneTools.playClip(this.element, frameRate);
     }
   }
@@ -299,7 +326,9 @@ export class DICOMViewerComponent implements OnInit {
 
   // Stop Clip
   public stopClip() {
+    this.viewPort.togglePlayClip();
     cornerstoneTools.stopClip(this.element);
+    this.viewPort.refreshImage();
   }
 
 

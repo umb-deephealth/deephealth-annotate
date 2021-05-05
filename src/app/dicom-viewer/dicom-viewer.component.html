@@ -57,20 +57,18 @@
                     <button type="button" (click)="previousImage()" id="previous_image_bttn"
                         class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="bottom" 
                         title="Previous Image"><span class="fa fa-backward"></span></button>
+                    <!-- Toggle Play/Stop clip -->
+                    <button type="button" *ngIf="enablePlayTools" (click)="togglePlay()" class="btn btn-sm btn-default" [ngStyle]="showPlayStop"
+                        data-container='body' data-toggle="tooltip" data-placement="bottom" id="play_bttn">
+                        <span class="fa fa-play" title="Play Clip" *ngIf="!this.viewPort.isClipPlaying"></span>
+                        <span class="fa fa-stop" title="Stop Clip" *ngIf="this.viewPort.isClipPlaying" style="color:rgb(211, 34, 81);"></span>
+                    </button>
                     <!-- Next Image -->
                     <button type="button" (click)="nextImage()" class="btn btn-sm btn-default" id="next_image_bttn"
-                        data-container='body' data-toggle="tooltip" data-placement="bottom" title="Next Image"><span
-                            class="fa fa-forward"></span></button>
+                        data-container='body' data-toggle="tooltip" data-placement="bottom" title="Next Image"><span class="fa fa-forward"></span></button>             
                     <!-- Stack scroll -->
                     <button type="button" (click)="toggleScroll()" class="btn btn-sm btn-default" [ngStyle]="showButtonToggleEnabled" data-container='body' id='stackscroll_bttn'
                         data-toggle="tooltip" data-placement="bottom" title="Toggle Stack Scroll"><span class="fa fa-bars"></span></button>
-                    <!-- Play clip -->
-                    <button type="button" *ngIf="enablePlayTools" (click)="playClip()" class="btn btn-sm btn-default"
-                        data-container='body' data-toggle="tooltip" data-placement="bottom" title="Play Clip" id="play_bttn">
-                        <span class="fa fa-play"></span></button>
-                    <!-- Stop clip -->
-                    <button type="button" *ngIf="enablePlayTools" (click)="stopClip()" class="btn btn-sm btn-default" data-container='body'
-                        data-toggle="tooltip" data-placement="bottom" title="Stop Clip" id="stop_bttn"><span class="fa fa-stop"></span></button>
                 </div>
             </div> 
             <!-- Progress Spinner -->
