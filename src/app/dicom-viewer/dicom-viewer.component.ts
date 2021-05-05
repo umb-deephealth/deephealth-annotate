@@ -12,6 +12,7 @@ declare const cornerstoneTools;
   styleUrls: ['./dicom-viewer.component.css']
 })
 export class DICOMViewerComponent implements OnInit {
+
   @Input() public enableViewerTools = false; // enable viewer tools
   @Input() public enablePlayTools = false; // enable Play Clip tools
   @Input() public downloadImagesURL = '' // download images URL
@@ -33,6 +34,10 @@ export class DICOMViewerComponent implements OnInit {
   private element: any;
   private targetImageCount = 0;
 
+  public loadingImages = false;
+
+  private toolList = ["pan", "zoom", "windowing", "rect", "length"];
+  private selectedTool = this.toolList[0];
 
   constructor() { }
 
@@ -50,14 +55,26 @@ export class DICOMViewerComponent implements OnInit {
     } else return '';
   }
 
-  // control exhibition of a loading images progress indicator
-  public loadingImages = false;
+
+  // control display of a loading images progress indicator
   public get showProgress(): any { return { display: (this.loadingImages) ? 'inline' : 'none' } };
 
-  // control styling of a button that can be toggled on/off
+
+  // control styling of a button for a tool that can be selected
+  public showSelectedTool(tool: string): any { 
+    if (tool == this.selectedTool) { 
+      return { 'color': 'rgb(211, 34, 81)', 'border': 'inset 2px', 'border-color': 'whitesmoke', 'background-color': '#343434' }; 
+    } 
+    else {
+      return { 'color': 'white', 'border-color': '#888888' };
+    }
+  };
+
+
+  // control styling of the StackScroll toggle button
   public get showButtonToggleEnabled(): any { 
     if (this.viewPort.isScrollEnabled) { 
-      return { 'color': 'rgb(211, 34, 81)', 'border-color': 'whitesmoke', 'border-style': 'inset' }; 
+      return { 'color': 'rgb(211, 34, 81)', 'border': 'inset 2px', 'border-color': 'whitesmoke', 'background-color': '#343434' }; 
     } 
     else {
       return { 'color': 'white', 'border-color': '#888888' };
@@ -68,7 +85,7 @@ export class DICOMViewerComponent implements OnInit {
   // control styling of the Play/Stop button
   public get showPlayStop(): any { 
     if (this.viewPort.isClipPlaying) { 
-      return { 'border-color': 'whitesmoke', 'border-style': 'inset' }; 
+      return { 'border-color': 'whitesmoke', 'border-style': 'inset 2px' }; 
     } 
     else {
       return { 'color': 'white', 'border-color': '#888888' };
@@ -212,6 +229,7 @@ export class DICOMViewerComponent implements OnInit {
     if (this.imageCount > 0) {
       cornerstoneTools.setToolActiveForElement(this.element, 'Wwwc', { mouseButtonMask: 1 }, ['Mouse']);
       cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 2 }, ['Mouse']); // pan right mouse
+      this.selectedTool = this.toolList[2];
     }
   }
 
@@ -221,6 +239,7 @@ export class DICOMViewerComponent implements OnInit {
     if (this.imageCount > 0) {
       cornerstoneTools.setToolActiveForElement(this.element, 'Zoom', { mouseButtonMask: 1 }, ['Mouse']); // zoom left mouse
       cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 2 }, ['Mouse']); // pan right mouse
+      this.selectedTool = this.toolList[1];
     }
   }
 
@@ -229,6 +248,7 @@ export class DICOMViewerComponent implements OnInit {
   public enablePan() {
     if (this.imageCount > 0) {
       cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 1 }, ['Mouse']);
+      this.selectedTool = this.toolList[0];
     }
   }
 
@@ -255,6 +275,7 @@ export class DICOMViewerComponent implements OnInit {
       cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 2 }, ['Mouse']); // pan right mouse
       this.LastUpdatedElement = 'Length'
       this.annotationsList.push('Length');
+      this.selectedTool = this.toolList[4];
     }
   }
 
@@ -288,6 +309,7 @@ export class DICOMViewerComponent implements OnInit {
       cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 2 }, ['Mouse']); // pan right mouse
       this.LastUpdatedElement = 'RectangleRoi';
       this.annotationsList.push('RectangleRoi');
+      this.selectedTool = this.toolList[3];
     }
   }
 
@@ -307,7 +329,7 @@ export class DICOMViewerComponent implements OnInit {
   public playClip() {
     if (this.imageCount > 0) {
       if (this.viewPort.isScrollEnabled) {
-        this.viewPort.toggleScroll();
+        this.viewPort.toggleScroll(); // Important to not change image while clip playing
       }
       let frameRate = 10;
       let stackState = cornerstoneTools.getToolState(this.element, 'stack');
