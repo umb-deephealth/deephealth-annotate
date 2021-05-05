@@ -7,8 +7,6 @@ declare const cornerstoneTools;
 declare const cornerstoneMath;
 
 
-
-
 @Directive({
   selector: '[cornerstone]',
 })
@@ -27,6 +25,9 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
 
   public scrollEnabled = false;
 
+  private isCornerstoneEnabled = false;
+  private clipPlaying = false;
+  
   // cornersTone Tools we use
   private WwwcTool = cornerstoneTools.WwwcTool;
   private PanTool = cornerstoneTools.PanTool;
@@ -46,6 +47,7 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
     return '';
   }
 
+
   public get zoomValue(): string {
     if (this.isCornerstoneEnabled) {
       let viewport = cornerstone.getViewport(this.element);
@@ -54,10 +56,15 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
     return '';
   }
 
-  private isCornerstoneEnabled = false;
+
+  public get isClipPlaying(): boolean {
+    return this.clipPlaying;
+  }
+
 
   constructor(private elementRef: ElementRef) {
   }
+
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
@@ -65,6 +72,7 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
       cornerstone.resize(this.element, true);
     }
   }
+
 
   @HostListener('wheel', ['$event'])
   onMouseWheel(event) {
@@ -86,8 +94,8 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
 
       this.displayImage(this.imageList[this.currentIndex]);
     }
-
   }
+
 
   ngOnInit() {
     // Retrieve the DOM element itself
@@ -112,6 +120,7 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
     this.resetViewer();
   }
 
+
   ngAfterViewChecked() {
   //  if (this.currentImage) cornerstone.resize(this.element, true);
   }
@@ -125,6 +134,7 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
     this.isCornerstoneEnabled = true;
   }
 
+
   public disableViewer() {
     this.element = this.elementRef.nativeElement;
     try {
@@ -133,6 +143,7 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
 
     this.isCornerstoneEnabled = false;
   }
+
 
   public resetImageCache() {
     this.imageList = [];
@@ -143,6 +154,7 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
     this.hospital = '';
     this.instanceNumber = '';
   }
+
 
   public previousImage() {
     if (this.imageList.length > 0) {
@@ -155,6 +167,7 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
 
   }
 
+
   public nextImage() {
     if (this.imageList.length > 0) {
       this.currentIndex++;
@@ -165,9 +178,11 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
     }
   }
 
+
   public toggleScroll() {
     this.scrollEnabled = !this.scrollEnabled;
   }
+
 
   public addImageData(imageData: any) {
     this.element = this.elementRef.nativeElement;
@@ -182,6 +197,7 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
 
     cornerstone.resize(this.element, true);
   }
+
 
   public displayImage(image) {
     this.element = this.elementRef.nativeElement;
@@ -219,6 +235,7 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
     //cornerstoneTools.stackPrefetch.enable(this.element);
   }
 
+  
   // deactivate all tools
   public resetAllTools() {
     cornerstoneTools.setToolDisabledForElement(this.element, 'Wwwc');

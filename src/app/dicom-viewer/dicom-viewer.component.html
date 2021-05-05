@@ -66,11 +66,11 @@
                         data-toggle="tooltip" data-placement="bottom" title="Toggle Stack Scroll"><span class="fa fa-bars"></span></button>
                     <!-- Play clip -->
                     <button type="button" *ngIf="enablePlayTools" (click)="playClip()" class="btn btn-sm btn-default"
-                        data-container='body' data-toggle="tooltip" data-placement="bottom" title="Play Clip">
+                        data-container='body' data-toggle="tooltip" data-placement="bottom" title="Play Clip" id="play_bttn">
                         <span class="fa fa-play"></span></button>
                     <!-- Stop clip -->
                     <button type="button" *ngIf="enablePlayTools" (click)="stopClip()" class="btn btn-sm btn-default" data-container='body'
-                        data-toggle="tooltip" data-placement="bottom" title="Stop Clip"><span class="fa fa-stop"></span></button>
+                        data-toggle="tooltip" data-placement="bottom" title="Stop Clip" id="stop_bttn"><span class="fa fa-stop"></span></button>
                 </div>
             </div> 
             <!-- Progress Spinner -->
