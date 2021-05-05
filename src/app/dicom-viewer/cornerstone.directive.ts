@@ -7,8 +7,6 @@ declare const cornerstoneTools;
 declare const cornerstoneMath;
 
 
-
-
 @Directive({
   selector: '[cornerstone]',
 })
@@ -21,13 +19,16 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
   private imageIdList = [];
   public currentIndex = 0;
   public currentImage: any;
-  public patientName = ''; // current image Patient name, do display on the overlay
+  public patientName = ''; // current image Patient name, to display on the overlay
   public hospital = ''; // current image Institution name, to display on the overlay
   public instanceNumber = ''; // current image Instance #, to display on the overlay
 
-  public scrollEnabled = false;
+  private scrollEnabled = false;
 
-  // cornersTone Tools we use
+  private isCornerstoneEnabled = false;
+  private clipPlaying = false;
+  
+  // Cornerstone Tools we use
   private WwwcTool = cornerstoneTools.WwwcTool;
   private PanTool = cornerstoneTools.PanTool;
   private ZoomTool = cornerstoneTools.ZoomTool;
@@ -38,26 +39,9 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
   private StackScrollTool = cornerstoneTools.StackScrollTool;
 
 
-  public get windowingValue(): string {
-    if (this.isCornerstoneEnabled) {
-      let viewport = cornerstone.getViewport(this.element);
-      if (this.currentImage && viewport) { return Math.round(viewport.voi.windowWidth) + "/" + Math.round(viewport.voi.windowCenter); }
-    }
-    return '';
-  }
-
-  public get zoomValue(): string {
-    if (this.isCornerstoneEnabled) {
-      let viewport = cornerstone.getViewport(this.element);
-      if (this.currentImage && viewport) { return viewport.scale.toFixed(2); }
-    }
-    return '';
-  }
-
-  private isCornerstoneEnabled = false;
-
   constructor(private elementRef: ElementRef) {
   }
+
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
@@ -65,6 +49,7 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
       cornerstone.resize(this.element, true);
     }
   }
+
 
   @HostListener('wheel', ['$event'])
   onMouseWheel(event) {
@@ -86,8 +71,8 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
 
       this.displayImage(this.imageList[this.currentIndex]);
     }
-
   }
+
 
   ngOnInit() {
     // Retrieve the DOM element itself
@@ -112,9 +97,39 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
     this.resetViewer();
   }
 
+
   ngAfterViewChecked() {
   //  if (this.currentImage) cornerstone.resize(this.element, true);
   }
+
+
+  public get windowingValue(): string {
+    if (this.isCornerstoneEnabled) {
+      let viewport = cornerstone.getViewport(this.element);
+      if (this.currentImage && viewport) { return Math.round(viewport.voi.windowWidth) + "/" + Math.round(viewport.voi.windowCenter); }
+    }
+    return '';
+  }
+
+
+  public get zoomValue(): string {
+    if (this.isCornerstoneEnabled) {
+      let viewport = cornerstone.getViewport(this.element);
+      if (this.currentImage && viewport) { return viewport.scale.toFixed(2); }
+    }
+    return '';
+  }
+
+
+  public get isClipPlaying(): boolean {
+    return this.clipPlaying;
+  }
+
+
+  public get isScrollEnabled(): boolean {
+    return this.scrollEnabled;
+  }
+
 
   //
   // reset the viewer, so only this current element is enabled
@@ -125,6 +140,7 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
     this.isCornerstoneEnabled = true;
   }
 
+
   public disableViewer() {
     this.element = this.elementRef.nativeElement;
     try {
@@ -133,6 +149,7 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
 
     this.isCornerstoneEnabled = false;
   }
+
 
   public resetImageCache() {
     this.imageList = [];
@@ -143,6 +160,7 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
     this.hospital = '';
     this.instanceNumber = '';
   }
+
 
   public previousImage() {
     if (this.imageList.length > 0) {
@@ -155,6 +173,7 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
 
   }
 
+
   public nextImage() {
     if (this.imageList.length > 0) {
       this.currentIndex++;
@@ -165,9 +184,21 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
     }
   }
 
+
+  public refreshImage() {
+    this.displayImage(this.imageList[this.currentIndex]);
+  }
+
+
   public toggleScroll() {
     this.scrollEnabled = !this.scrollEnabled;
   }
+
+
+  public togglePlayClip() {
+    this.clipPlaying = !this.clipPlaying;
+  }
+
 
   public addImageData(imageData: any) {
     this.element = this.elementRef.nativeElement;
@@ -182,6 +213,7 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
 
     cornerstone.resize(this.element, true);
   }
+
 
   public displayImage(image) {
     this.element = this.elementRef.nativeElement;
@@ -218,6 +250,7 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
     cornerstoneTools.setToolActiveForElement(this.element, 'StackScroll', {});
     //cornerstoneTools.stackPrefetch.enable(this.element);
   }
+
 
   // deactivate all tools
   public resetAllTools() {

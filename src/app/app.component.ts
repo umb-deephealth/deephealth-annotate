@@ -1,10 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component'
 import { DICOMViewerComponent } from './dicom-viewer/dicom-viewer.component';
+import hotkeys from 'hotkeys-js';
+
 
 declare const cornerstone;
 declare const cornerstoneWADOImageLoader;
+
 
 @Component({
   selector: 'app-root',
@@ -12,11 +15,14 @@ declare const cornerstoneWADOImageLoader;
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+
   @ViewChild(DICOMViewerComponent, { static: true }) viewPort: DICOMViewerComponent;
+
 
   constructor(public dialog: MatDialog) {}
 
   ngOnInit() {
+    // Initialize the cornerstoneWADOImageLoaderCodecs
     cornerstoneWADOImageLoader.external.cornerstone = cornerstone;
     cornerstoneWADOImageLoader.webWorkerManager.initialize({
         webWorkerPath: './assets/cornerstone/webworkers/cornerstoneWADOImageLoaderWebWorker.js',
@@ -26,7 +32,62 @@ export class AppComponent implements OnInit {
             }
         }
     });
+
+    // Setup all Keyboard Shortcuts here
+    hotkeys('p,z,w,i,r,l,alt+enter,u,esc,left,right,up,down,/,s', function(event, handler){
+      event.preventDefault();
+      document.getElementById("viewer").focus();
+      switch(handler.key) {
+        case 'p':
+          document.getElementById('pan_bttn').click();
+          break;
+        case 'z':
+          document.getElementById('zoom_bttn').click();
+          break;
+        case 'w':
+          document.getElementById('windowing_bttn').click();
+          break;
+        case 'i':
+          document.getElementById('invert_bttn').click();
+          break;
+        case 'r':
+          document.getElementById('rectangleroi_bttn').click();
+          break;
+        case 'l': 
+          document.getElementById('length_bttn').click();
+          break;
+        case 'alt+enter':
+          document.getElementById('export_bttn').click();
+          break;
+        case 'u':
+          document.getElementById('undo_bttn').click();
+          break;
+        case 'esc':
+          document.getElementById('reset_bttn').click();
+          break;
+        case 'left':
+        case 'down':
+          document.getElementById('previous_image_bttn').click();
+          break;
+        case 'right':
+        case 'up':
+          document.getElementById('next_image_bttn').click();
+          break;
+        case '/':
+          document.getElementById('play_bttn').click();
+          break;
+        case 's':
+          document.getElementById('stackscroll_bttn').click();
+          break;
+      }
+    });
   }
+
+
+  ngAfterViewChecked(): void {
+    document.documentElement.focus();
+  }
+
 
   openDialog() {
     const dialogRef = this.dialog.open(InfoDialogComponent, {
@@ -38,6 +99,13 @@ export class AppComponent implements OnInit {
       //console.log(`Dialog result: ${result}`);
     });
   }
+
+
+  // File drag & drop handler, $event contains an array of files
+  onFileDropped($event) {
+    this.loadDICOMImages($event);
+  }
+
 
   /**
    * Load selected DICOM images
