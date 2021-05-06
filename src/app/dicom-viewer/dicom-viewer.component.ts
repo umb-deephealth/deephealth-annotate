@@ -37,7 +37,7 @@ export class DICOMViewerComponent implements OnInit {
   public loadingImages = false;
 
   private toolList = ["pan", "zoom", "windowing", "rect", "length"];
-  private selectedTool = this.toolList[0];
+  private selectedTool = '';
 
   constructor() { }
 
@@ -179,6 +179,8 @@ export class DICOMViewerComponent implements OnInit {
     if (this.loadedImages.length >= this.targetImageCount) { // did we finish loading images?
       this.loadingImages = false; // deactivate progress indicator
     }
+
+    this.enablePan();
   }
 
 
@@ -187,7 +189,6 @@ export class DICOMViewerComponent implements OnInit {
     this.currentSeries = this.seriesList[index];
     this.imageCount = this.currentSeries.imageCount; // get total image count
     this.viewPort.resetImageCache(); // clean up image cache
-    this.selectedTool = this.toolList[0]; // default tool is pan
 
     for (let i = 0; i < this.currentSeries.imageList.length; i++) {
       const imageData = this.currentSeries.imageList[i];
@@ -202,6 +203,7 @@ export class DICOMViewerComponent implements OnInit {
   public nextImage() {
     if (this.viewPort.currentIndex < this.imageCount && !this.viewPort.isClipPlaying) {
       this.viewPort.nextImage();
+      //this.selectedTool = this.toolList[0];
     }
   }
 
@@ -209,6 +211,7 @@ export class DICOMViewerComponent implements OnInit {
   public previousImage() {
     if (this.viewPort.currentIndex > 0 && !this.viewPort.isClipPlaying) {
       this.viewPort.previousImage();
+      //this.selectedTool = this.toolList[0];
     }
   }
 
@@ -252,6 +255,7 @@ export class DICOMViewerComponent implements OnInit {
   public enablePan() {
     if (this.imageCount > 0) {
       cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 1 }, ['Mouse']);
+      cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 2 }, ['Mouse']); // pan right mouse
       this.selectedTool = this.toolList[0];
     }
   }
