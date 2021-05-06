@@ -36,9 +36,10 @@ export class DICOMViewerComponent implements OnInit {
 
   public loadingImages = false;
 
-  private toolList = ["pan", "zoom", "windowing", "rect", "length"];
+  private toolList = ["Pan", "Zoom", "Wwwc", "RectangleRoi", "Length"];
   private selectedTool = '';
 
+  
   constructor() { }
 
 
@@ -102,7 +103,6 @@ export class DICOMViewerComponent implements OnInit {
     this.element = this.viewPort.element;
     this.imageIdList = imageIdList;
     this.viewPort.resetViewer();
-    // maybe here we can add a loading icon/animation while DICOM files are loading
     this.viewPort.resetImageCache(); // clean up image cache
     this.seriesList = []; // start a new series list
     this.currentSeriesIndex = 0; // always display first series
@@ -203,7 +203,6 @@ export class DICOMViewerComponent implements OnInit {
   public nextImage() {
     if (this.viewPort.currentIndex < this.imageCount && !this.viewPort.isClipPlaying) {
       this.viewPort.nextImage();
-      //this.selectedTool = this.toolList[0];
     }
   }
 
@@ -211,7 +210,6 @@ export class DICOMViewerComponent implements OnInit {
   public previousImage() {
     if (this.viewPort.currentIndex > 0 && !this.viewPort.isClipPlaying) {
       this.viewPort.previousImage();
-      //this.selectedTool = this.toolList[0];
     }
   }
 
