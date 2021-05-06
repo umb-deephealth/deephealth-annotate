@@ -12,6 +12,9 @@ declare const cornerstoneTools;
   styleUrls: ['./dicom-viewer.component.css']
 })
 export class DICOMViewerComponent implements OnInit {
+  
+  @ViewChild(CornerstoneDirective, { static: true }) viewPort: CornerstoneDirective; // the main cornerstone viewport
+  @ViewChildren(ThumbnailDirective) thumbnails: Array<ThumbnailDirective>;
 
   @Input() public enableViewerTools = false; // enable viewer tools
   @Input() public enablePlayTools = false; // enable Play Clip tools
@@ -23,23 +26,17 @@ export class DICOMViewerComponent implements OnInit {
   public currentSeries: any = {};
   public imageCount = 0; // total image count being viewed
 
-  public LastUpdatedElement; // since we're using annotationsList for undoing annotations, this may not be needed
-  public annotationsList = []; // keep track of all tools/annotations used
-
-  @ViewChild(CornerstoneDirective, { static: true }) viewPort: CornerstoneDirective; // the main cornerstone viewport
-  @ViewChildren(ThumbnailDirective) thumbnails: Array<ThumbnailDirective>;
-
   private loadedImages = [];
   private imageIdList = [];
   private element: any;
   private targetImageCount = 0;
-
   public loadingImages = false;
 
+  private annotationsList = []; // keep track of all tools/annotations used
   private toolList = ["Pan", "Zoom", "Wwwc", "RectangleRoi", "Length"];
   private selectedTool = '';
 
-  
+
   constructor() { }
 
 
@@ -279,7 +276,6 @@ export class DICOMViewerComponent implements OnInit {
     if (this.imageCount > 0) {
       cornerstoneTools.setToolActiveForElement(this.element, 'Length', { mouseButtonMask: 1 }, ['Mouse']);
       cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 2 }, ['Mouse']); // pan right mouse
-      this.LastUpdatedElement = 'Length'
       this.annotationsList.push('Length');
       this.selectedTool = this.toolList[4];
     }
@@ -313,7 +309,6 @@ export class DICOMViewerComponent implements OnInit {
     if (this.imageCount > 0) {
       cornerstoneTools.setToolActiveForElement(this.element, 'RectangleRoi', { mouseButtonMask: 1 }, ['Mouse']);
       cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 2 }, ['Mouse']); // pan right mouse
-      this.LastUpdatedElement = 'RectangleRoi';
       this.annotationsList.push('RectangleRoi');
       this.selectedTool = this.toolList[3];
     }
