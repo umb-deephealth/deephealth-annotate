@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener, OnInit, AfterViewChecked } from '@angular/core';
+import { Directive, ElementRef, HostListener, OnInit } from '@angular/core';
 import * as Hammer from 'hammerjs';
 
 
@@ -11,7 +11,7 @@ declare const cornerstoneMath;
   selector: '[cornerstone]',
 })
 
-export class CornerstoneDirective implements OnInit, AfterViewChecked {
+export class CornerstoneDirective implements OnInit {
 
   public element: any;
 
@@ -98,11 +98,6 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
   }
 
 
-  ngAfterViewChecked() {
-  //  if (this.currentImage) cornerstone.resize(this.element, true);
-  }
-
-
   public get windowingValue(): string {
     if (this.isCornerstoneEnabled) {
       let viewport = cornerstone.getViewport(this.element);
@@ -131,9 +126,6 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
   }
 
 
-  //
-  // reset the viewer, so only this current element is enabled
-  //
   public resetViewer() {
     this.disableViewer();
     cornerstone.enable(this.element);
@@ -202,14 +194,14 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
 
   public addImageData(imageData: any) {
     this.element = this.elementRef.nativeElement;
-    //if (!this.imageList.filter(img => img.imageId === imageData.imageId).length) {
+
     this.imageList.push(imageData);
     this.imageIdList.push(imageData.imageId);
+
     if (this.imageList.length === 1) {
       this.currentIndex = 0;
       this.displayImage(imageData);
     }
-    //}
 
     cornerstone.resize(this.element, true);
   }
@@ -220,6 +212,7 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
     const viewport = cornerstone.getDefaultViewportForImage(this.element, image);
     cornerstone.displayImage(this.element, image, viewport);
     this.currentImage = image;
+
     // Fit the image to the viewport window
     cornerstone.fitToWindow(this.element);
     cornerstone.resize(this.element, true);
@@ -228,12 +221,6 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
     if (image.data.string('x00100010')) this.patientName = image.data.string('x00100010').replace(/\^/g, '');
     this.hospital = image.data.string('x00080080');
     this.instanceNumber = image.data.intString('x00200011') + '/' + image.data.intString('x00200013');
-
-    // Enable all tools we want to use with this element
-    cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 1 }, ['Mouse']); // pan is the default tool for left mouse button
-    cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 2 }, ['Mouse']); // pan is the default tool for right mouse button
-
-    // Stack tools
 
     // Define the Stack object
     const stack = {
@@ -245,10 +232,9 @@ export class CornerstoneDirective implements OnInit, AfterViewChecked {
     // Add the stack tool state to the enabled element
     cornerstoneTools.addStackStateManager(this.element, ['stack']);
     cornerstoneTools.addToolState(this.element, 'stack', stack);
-    // cornerstoneTools.stackScrollWheel.activate(this.element);
+
     // Enable all tools we want to use with this element
     cornerstoneTools.setToolActiveForElement(this.element, 'StackScroll', {});
-    //cornerstoneTools.stackPrefetch.enable(this.element);
   }
 
 

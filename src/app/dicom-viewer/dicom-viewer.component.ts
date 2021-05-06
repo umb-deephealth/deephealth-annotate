@@ -12,6 +12,9 @@ declare const cornerstoneTools;
   styleUrls: ['./dicom-viewer.component.css']
 })
 export class DICOMViewerComponent implements OnInit {
+  
+  @ViewChild(CornerstoneDirective, { static: true }) viewPort: CornerstoneDirective; // the main cornerstone viewport
+  @ViewChildren(ThumbnailDirective) thumbnails: Array<ThumbnailDirective>;
 
   @Input() public enableViewerTools = false; // enable viewer tools
   @Input() public enablePlayTools = false; // enable Play Clip tools
@@ -23,21 +26,16 @@ export class DICOMViewerComponent implements OnInit {
   public currentSeries: any = {};
   public imageCount = 0; // total image count being viewed
 
-  public LastUpdatedElement; // since we're using annotationsList for undoing annotations, this may not be needed
-  public annotationsList = []; 
-
-  @ViewChild(CornerstoneDirective, { static: true }) viewPort: CornerstoneDirective; // the main cornerstone viewport
-  @ViewChildren(ThumbnailDirective) thumbnails: Array<ThumbnailDirective>;
-
   private loadedImages = [];
   private imageIdList = [];
   private element: any;
   private targetImageCount = 0;
-
   public loadingImages = false;
 
-  private toolList = ["pan", "zoom", "windowing", "rect", "length"];
-  private selectedTool = this.toolList[0];
+  private annotationsList = []; // keep track of all tools/annotations used
+  private toolList = ["Pan", "Zoom", "Wwwc", "RectangleRoi", "Length"];
+  private selectedTool = '';
+
 
   constructor() { }
 
@@ -102,7 +100,6 @@ export class DICOMViewerComponent implements OnInit {
     this.element = this.viewPort.element;
     this.imageIdList = imageIdList;
     this.viewPort.resetViewer();
-    // maybe here we can add a loading icon/animation while DICOM files are loading
     this.viewPort.resetImageCache(); // clean up image cache
     this.seriesList = []; // start a new series list
     this.currentSeriesIndex = 0; // always display first series
@@ -179,6 +176,8 @@ export class DICOMViewerComponent implements OnInit {
     if (this.loadedImages.length >= this.targetImageCount) { // did we finish loading images?
       this.loadingImages = false; // deactivate progress indicator
     }
+
+    this.enablePan();
   }
 
 
@@ -251,6 +250,7 @@ export class DICOMViewerComponent implements OnInit {
   public enablePan() {
     if (this.imageCount > 0) {
       cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 1 }, ['Mouse']);
+      cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 2 }, ['Mouse']); // pan right mouse
       this.selectedTool = this.toolList[0];
     }
   }
@@ -276,7 +276,6 @@ export class DICOMViewerComponent implements OnInit {
     if (this.imageCount > 0) {
       cornerstoneTools.setToolActiveForElement(this.element, 'Length', { mouseButtonMask: 1 }, ['Mouse']);
       cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 2 }, ['Mouse']); // pan right mouse
-      this.LastUpdatedElement = 'Length'
       this.annotationsList.push('Length');
       this.selectedTool = this.toolList[4];
     }
@@ -310,7 +309,6 @@ export class DICOMViewerComponent implements OnInit {
     if (this.imageCount > 0) {
       cornerstoneTools.setToolActiveForElement(this.element, 'RectangleRoi', { mouseButtonMask: 1 }, ['Mouse']);
       cornerstoneTools.setToolActiveForElement(this.element, 'Pan', { mouseButtonMask: 2 }, ['Mouse']); // pan right mouse
-      this.LastUpdatedElement = 'RectangleRoi';
       this.annotationsList.push('RectangleRoi');
       this.selectedTool = this.toolList[3];
     }
@@ -386,16 +384,12 @@ export class DICOMViewerComponent implements OnInit {
   public resetImage() {
     if (confirm("Are you sure you want to reset all annotations?") == true) {
       if (this.imageCount > 0) {
-        let toolStateManager = cornerstoneTools.getElementToolStateManager(this.element);
-        // Note that this only works on ImageId-specific tool state managers (for now)
-        //toolStateManager.clear(this.element);
         cornerstoneTools.clearToolState(this.element, "Length");
         cornerstoneTools.clearToolState(this.element, "Angle");
         cornerstoneTools.clearToolState(this.element, "Probe");
         cornerstoneTools.clearToolState(this.element, "EllipticalRoi");
         cornerstoneTools.clearToolState(this.element, "RectangleRoi");
-        cornerstone.updateImage(this.element);
-        this.resetAllTools();
+
         this.viewPort.displayImage(this.viewPort.imageList[this.viewPort.currentIndex]);
       } 
     } 
