@@ -198,7 +198,7 @@ export class DICOMViewerComponent implements OnInit {
    * Image scroll methods
    */
   public nextImage() {
-    if (this.viewPort.currentIndex < this.imageCount && !this.viewPort.isClipPlaying) {
+    if (this.imageCount > 1 && this.viewPort.currentIndex < this.imageCount && !this.viewPort.isClipPlaying) {
       this.viewPort.nextImage();
     }
   }
