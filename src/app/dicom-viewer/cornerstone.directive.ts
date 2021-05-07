@@ -14,13 +14,16 @@ declare const cornerstoneMath;
 export class CornerstoneDirective implements OnInit {
 
   public element: any;
+  
+  private fontFamily = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'; 
+  private fontSize = '15px';
 
   public imageList = [];
   private imageIdList = [];
   public currentIndex = 0;
   public currentImage: any;
-  public patientName = ''; // current image Patient name, to display on the overlay
-  public hospital = ''; // current image Institution name, to display on the overlay
+  public patientName = '';    // current image Patient name, to display on the overlay
+  public hospital = '';       // current image Institution name, to display on the overlay
   public instanceNumber = ''; // current image Instance #, to display on the overlay
 
   private scrollEnabled = false;
@@ -83,6 +86,12 @@ export class CornerstoneDirective implements OnInit {
     cornerstoneTools.external.Hammer = Hammer;
     cornerstoneTools.external.cornerstoneMath = cornerstoneMath;
     cornerstoneTools.init({ globalToolSyncEnabled: true });
+
+    cornerstoneTools.textStyle.setFont(this.fontSize + ' ' + this.fontFamily);
+
+    cornerstoneTools.toolStyle.setToolWidth(1); // thickness of RectangleRoi or Length tool lines
+    cornerstoneTools.toolColors.setToolColor('rgb(255, 255, 0)'); // Set color for inactive tools
+    cornerstoneTools.toolColors.setActiveColor('rgb(0, 255, 0)'); // Set color for active tools
 
     cornerstoneTools.addTool(this.WwwcTool);
     cornerstoneTools.addTool(this.PanTool);
