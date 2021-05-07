@@ -85,7 +85,7 @@
             <div cornerstone style="width: 100%; height: 100%; top:0px; left:0px; position:absolute; outline:none; margin: 0 auto;"
                 id="dicomImage">
             </div>
-            <div id="mrtopright" style="position:absolute; right:3px; top:3x;">
+            <div class="viewer-text" id="mrtopright" style="position:absolute; right:3px; top:3x;">
                 <div *ngIf="viewPort.patientName != ''">
                     <b>Patient:</b> {{viewPort.patientName}}
                 </div>
@@ -93,13 +93,13 @@
                     <b>Instance:</b> {{viewPort.instanceNumber}}
                 </div>
             </div>
-            <div id="mrbottomleft" style="position:absolute; bottom:3px; left:3px">
+            <div class="viewer-text" id="mrbottomleft" style="position:absolute; bottom:3px; left:3px">
                 <div>
                     <b>WW/WL:</b> {{viewPort.windowingValue}}
                 </div>
                 <div id="zoomText"><b>Zoom:</b> {{viewPort.zoomValue}}</div>
             </div>
-            <div id="mrbottomright" style="position:absolute; bottom:6px; right:3px">
+            <div class="viewer-text" id="mrbottomright" style="position:absolute; bottom:6px; right:3px">
                 <div id="sliceText"><b>Image:</b> {{(imageCount > 0)?viewPort.currentIndex+1:0}}/{{imageCount}}</div>
             </div>
         </div>

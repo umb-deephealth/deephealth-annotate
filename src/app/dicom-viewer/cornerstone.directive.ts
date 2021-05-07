@@ -90,8 +90,8 @@ export class CornerstoneDirective implements OnInit {
     cornerstoneTools.textStyle.setFont(this.fontSize + ' ' + this.fontFamily);
 
     cornerstoneTools.toolStyle.setToolWidth(2); // thickness of RectangleRoi or Length tool lines
-    cornerstoneTools.toolColors.setToolColor('rgb(255, 0, 0)'); // Set color for inactive tools
-    cornerstoneTools.toolColors.setActiveColor('rgb(255, 255, 0)'); // Set color for active tools
+    cornerstoneTools.toolColors.setToolColor('rgb(255, 255, 0)'); // Set color for inactive tools
+    cornerstoneTools.toolColors.setActiveColor('rgb(0, 255, 0)'); // Set color for active tools
 
     cornerstoneTools.addTool(this.WwwcTool);
     cornerstoneTools.addTool(this.PanTool);
