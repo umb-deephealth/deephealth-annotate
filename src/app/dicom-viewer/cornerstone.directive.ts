@@ -16,7 +16,7 @@ export class CornerstoneDirective implements OnInit {
   public element: any;
   
   private fontFamily = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'; 
-  private fontSize = '16px';
+  private fontSize = '15px';
 
   public imageList = [];
   private imageIdList = [];
@@ -89,7 +89,7 @@ export class CornerstoneDirective implements OnInit {
 
     cornerstoneTools.textStyle.setFont(this.fontSize + ' ' + this.fontFamily);
 
-    cornerstoneTools.toolStyle.setToolWidth(2); // thickness of RectangleRoi or Length tool lines
+    cornerstoneTools.toolStyle.setToolWidth(1); // thickness of RectangleRoi or Length tool lines
     cornerstoneTools.toolColors.setToolColor('rgb(255, 255, 0)'); // Set color for inactive tools
     cornerstoneTools.toolColors.setActiveColor('rgb(0, 255, 0)'); // Set color for active tools
 

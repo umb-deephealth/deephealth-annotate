@@ -116,26 +116,11 @@ export class DICOMViewerComponent implements OnInit {
   }
 
 
-  public download(filename, text) {
-    var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/json;charset=utf-8,' + encodeURIComponent(text));
-    element.setAttribute('download', filename + '.json');
-
-    element.style.display = 'none';
-    document.body.appendChild(element);
-
-    element.click();
-
-    document.body.removeChild(element);
-  }
-
-
   /**
    *
    * @param imageData the dicom image data
    */
   private imageLoaded(imageData) {
-    //console.log(imageData.imageId)
     // build list of series in all loadded images
     const series = {
       studyID: imageData.data.string('x0020000d'),
@@ -282,21 +267,36 @@ export class DICOMViewerComponent implements OnInit {
   }
 
 
+  // Download data as a .json file
+  public download(filename, text) {
+    let element = document.createElement('a');
+    element.setAttribute('href', 'data:text/json;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename + '.json');
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
+  }
+
+
   // save tool states - download annotation data for all images
   public saveToolState() {
-
+    let Rois = new Array("RectangleRoi", "Length");
+    let toolArray = new Array();
+    
     if (this.imageCount > 0) {
-      var Rois = new Array("RectangleRoi", "Length");
-      var toolArray = new Array()
-
       this.loadedImages.forEach(image => {
 
         Rois.forEach(element => {
-          var tooldata = cornerstoneTools.getToolState(this.element, element)
+          let tooldata = cornerstoneTools.getToolState(this.element, element);
           if (tooldata != undefined) {
-            toolArray.push(tooldata)
+            toolArray.push(tooldata);
           }
         });
+        
       });
     }
 
