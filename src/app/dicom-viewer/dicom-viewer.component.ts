@@ -17,9 +17,9 @@ export class DICOMViewerComponent implements OnInit {
   @ViewChildren(ThumbnailDirective) thumbnails: Array<ThumbnailDirective>;
 
   @Input() public enableViewerTools = false; // enable viewer tools
-  @Input() public enablePlayTools = false; // enable Play Clip tools
-  @Input() public downloadImagesURL = '' // download images URL
-  @Input() public maxImagesToLoad = 1000000; // limit for the automatic loading of study images
+  @Input() public enablePlayTools = false;   // enable Play Clip tools
+  @Input() public downloadImagesURL = ''     // download images URL
+  @Input() public maxImagesToLoad = 9999999; // limit for the automatic loading of study images
 
   public seriesList = []; // list of series on the images being displayed
   public currentSeriesIndex = 0;
@@ -284,23 +284,41 @@ export class DICOMViewerComponent implements OnInit {
 
   // save tool states - download annotation data for all images
   public saveToolState() {
-    let Rois = new Array("RectangleRoi", "Length");
-    let toolArray = new Array();
+    let exportArray = [];
     
-    if (this.imageCount > 0) {
-      this.loadedImages.forEach(image => {
+    for (let i = 0; i < this.seriesList.length; ++i) {
 
-        Rois.forEach(element => {
-          let tooldata = cornerstoneTools.getToolState(this.element, element);
-          if (tooldata != undefined) {
-            toolArray.push(tooldata);
-          }
-        });
+      this.showSeries(i);
+
+      for (let image of this.seriesList[i].imageList) {
         
-      });
+        let getter = cornerstoneTools.getElementToolStateManager(this.element).get;
+        let lengthToolData = getter(this.element, 'Length');
+        let rectangleRoiToolData = getter(this.element, 'RectangleRoi');
+
+        let imageAnnotations = {
+          studyID: image.data.string('x0020000d'),
+          seriesID: image.data.string('x0020000e'),
+          SOPInstanceUID: image.data.string('x00080018'),
+          annotations: {
+            lengthData: lengthToolData,
+            rectangleData: rectangleRoiToolData
+          }
+        }
+
+        if (!lengthToolData)       imageAnnotations.annotations.lengthData = "null"
+        if (!rectangleRoiToolData) imageAnnotations.annotations.rectangleData = "null"
+
+        if (lengthToolData || rectangleRoiToolData) {
+          exportArray.push(imageAnnotations);
+        }
+
+        this.nextImage();
+      }
+
     }
 
-    this.download("Annotations", JSON.stringify(toolArray));
+    this.download("annotations", JSON.stringify(exportArray));
   }
 
 

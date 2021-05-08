@@ -10,7 +10,6 @@ declare const cornerstoneMath;
 @Directive({
   selector: '[cornerstone]',
 })
-
 export class CornerstoneDirective implements OnInit {
 
   public element: any;
@@ -171,7 +170,6 @@ export class CornerstoneDirective implements OnInit {
       }
       this.displayImage(this.imageList[this.currentIndex]);
     }
-
   }
 
 
@@ -203,7 +201,6 @@ export class CornerstoneDirective implements OnInit {
 
   public addImageData(imageData: any) {
     this.element = this.elementRef.nativeElement;
-
     this.imageList.push(imageData);
     this.imageIdList.push(imageData.imageId);
 
