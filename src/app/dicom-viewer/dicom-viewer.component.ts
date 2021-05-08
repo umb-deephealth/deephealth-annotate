@@ -285,6 +285,10 @@ export class DICOMViewerComponent implements OnInit {
   // save tool states - download annotation data for all images
   public saveToolState() {
     let exportArray = [];
+
+    // Save viewer state to restore later
+    let lastSeriesSeen = this.currentSeriesIndex;
+    let lastCurrentImageIndex = this.viewPort.currentIndex;
     
     for (let i = 0; i < this.seriesList.length; ++i) {
 
@@ -316,6 +320,13 @@ export class DICOMViewerComponent implements OnInit {
         this.nextImage();
       }
 
+    }
+
+    // Restore viewer state after iterating through images
+    this.showSeries(lastSeriesSeen);
+
+    while (this.viewPort.currentIndex < lastCurrentImageIndex) {
+      this.viewPort.nextImage();
     }
 
     this.download("annotations", JSON.stringify(exportArray));
