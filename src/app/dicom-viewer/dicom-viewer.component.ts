@@ -1,9 +1,20 @@
 import { Component, ViewChild, OnInit, Input, ViewChildren } from '@angular/core';
 import { CornerstoneDirective } from './cornerstone.directive';
 import { ThumbnailDirective } from './thumbnail.directive';
+import cornerstoneWADOImageLoader from 'cornerstone-wado-image-loader';
 
 declare const cornerstone;
 declare const cornerstoneTools;
+declare const cornerstoneWADOImageLoader;
+
+
+
+cornerstoneWADOImageLoader.configure({
+  beforeSend: function(xhr) {
+      // Add custom headers here (e.g. auth tokens)
+      //xhr.setRequestHeader('x-auth-token', 'my auth token');
+  }
+});
 
 
 @Component({
@@ -128,9 +139,12 @@ export class DICOMViewerComponent implements OnInit {
       seriesNumber: imageData.data.intString('x00200011'),
       studyDescription: imageData.data.string('x00081030'),
       seriesDescription: imageData.data.string('x0008103e'),
-      imageCount: 1,
+      numFrames: imageData.data.string('x00280008'),
+      imageCount: imageData.data.string('x00280008'),
       imageList: [imageData]
     }
+
+    var numFrames = imageData.data.string('x00280008');
     // if this is a new series, add it to the list
     let seriesIndex = this.seriesList.findIndex(item => item.seriesID === series.seriesID);
     if (seriesIndex < 0) {
@@ -300,10 +314,13 @@ export class DICOMViewerComponent implements OnInit {
         let lengthToolData = getter(this.element, 'Length');
         let rectangleRoiToolData = getter(this.element, 'RectangleRoi');
 
+        console.log(image.data.string('x00280008'));
+
         let imageAnnotations = {
           studyID: image.data.string('x0020000d'),
           seriesID: image.data.string('x0020000e'),
           SOPInstanceUID: image.data.string('x00080018'),
+          numFrames: image.data.string('x00280008'),
           annotations: {
             lengthData: lengthToolData,
             rectangleData: rectangleRoiToolData
