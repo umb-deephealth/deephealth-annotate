@@ -268,7 +268,7 @@ export class DICOMViewerComponent implements OnInit {
 
 
   // Download data as a .json file
-  public download(filename, text) {
+  public download(filename: any, text: any) {
     let element = document.createElement('a');
     element.setAttribute('href', 'data:text/json;charset=utf-8,' + encodeURIComponent(text));
     element.setAttribute('download', filename + '.json');
@@ -295,24 +295,27 @@ export class DICOMViewerComponent implements OnInit {
       this.showSeries(i);
 
       for (let image of this.seriesList[i].imageList) {
-        
-        let getter = cornerstoneTools.getElementToolStateManager(this.element).get;
-        let lengthToolData = getter(this.element, 'Length');
-        let rectangleRoiToolData = getter(this.element, 'RectangleRoi');
 
         let imageAnnotations = {
           studyID: image.data.string('x0020000d'),
           seriesID: image.data.string('x0020000e'),
           SOPInstanceUID: image.data.string('x00080018'),
           annotations: {
-            lengthData: lengthToolData,
-            rectangleData: rectangleRoiToolData
+            lengthData: null,
+            rectangleData: null
           }
         }
+        
+        let getter = cornerstoneTools.getElementToolStateManager(this.element).get;
+        let lengthToolData = getter(this.element, 'Length');
+        let rectangleRoiToolData = getter(this.element, 'RectangleRoi');
 
-        if (!lengthToolData)       imageAnnotations.annotations.lengthData = "null"
-        if (!rectangleRoiToolData) imageAnnotations.annotations.rectangleData = "null"
-
+        if (!lengthToolData) imageAnnotations.annotations.lengthData = null;
+        else imageAnnotations.annotations.lengthData = lengthToolData.data;
+        
+        if (!rectangleRoiToolData) imageAnnotations.annotations.rectangleData = null;
+        else imageAnnotations.annotations.rectangleData = rectangleRoiToolData.data;
+        
         if (lengthToolData || rectangleRoiToolData) {
           exportArray.push(imageAnnotations);
         }
@@ -330,6 +333,85 @@ export class DICOMViewerComponent implements OnInit {
     }
 
     this.download("annotations", JSON.stringify(exportArray));
+  }
+
+
+  // Load tool states from a .json file, restoring them to the viewer
+  public loadToolState(event) {
+    if (this.imageCount < 1)
+      return; // Must have image(s) loaded to restore annotations
+
+    let file = event[0];
+    let reader = new FileReader();
+    reader.readAsText(file, "UTF-8");
+
+    reader.onload = ((evt) => {
+
+      let idToAnnotation = new Map();
+      let jsonObj = JSON.parse(evt.target.result as string);
+
+      // Populate the image id -> annotation map
+      for (let element of jsonObj) { 
+        idToAnnotation.set(element.SOPInstanceUID, element.annotations);
+      }
+
+      // Save viewer state to restore later
+      let lastSeriesSeen = this.currentSeriesIndex;
+      let lastCurrentImageIndex = this.viewPort.currentIndex;
+      
+      // Flip through all loaded images and restore tool state for each
+      for (let i = 0; i < this.seriesList.length; ++i) {
+
+        this.showSeries(i);
+
+        for (let image of this.seriesList[i].imageList) {
+
+          let currSOPInstanceUID = image.data.string('x00080018');
+          let rectData, lengthData;
+
+          if (idToAnnotation.has(currSOPInstanceUID)) {
+            let annotations = idToAnnotation.get(currSOPInstanceUID);
+            rectData = annotations.rectangleData;
+            lengthData = annotations.lengthData;
+          }
+          
+          // Restore RectangleRoi annotations for current image
+          if (rectData != null) {
+            for (let item of rectData) {
+              cornerstoneTools.addToolState(this.element, 'RectangleRoi', item);
+            }
+          }
+
+          // Restore Length annotations for current image
+          if (lengthData != null) {
+            for (let item of lengthData) {
+              cornerstoneTools.addToolState(this.element, 'Length', item);
+            }
+          }
+          
+          this.nextImage();
+        }
+      }
+
+      // Trigger the annotations to render again by activating tools
+      this.enableRectangle();
+      this.enableLength();
+      this.enablePan();
+
+      // Restore viewer state after iterating through images
+      this.showSeries(lastSeriesSeen);
+
+      while (this.viewPort.currentIndex < lastCurrentImageIndex) {
+        this.viewPort.nextImage();
+      }
+
+      this.viewPort.refreshImage();
+    });
+
+    // File error handler
+    reader.onerror = (() => {
+      console.log("Error reading JSON file.");
+    });
   }
 
 

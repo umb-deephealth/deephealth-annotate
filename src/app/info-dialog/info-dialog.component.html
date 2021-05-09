@@ -118,6 +118,7 @@
     file, each DICOM image is represented as one JSON object containing any annotation metadata within that image as a set of key/value pairs. Therefore, the
     contents of the file is simply a list containing one of these objects for each image. See below for example JSON properties.<br><br>
     Simplified JSON example:<br><br>
+
   <code>{{'{'}} "width":76,<br>
     "height":25,<br>
     "left":984,<br>
@@ -126,7 +127,10 @@
     "x":141,<br>
     "y":152,<br>
     "length":52,<br>
-    "unit":"mm" {{'}'}}</code></p>
+    "unit":"mm" {{'}'}}</code><br><br>
+    
+    One of these .JSON files can then later be dropped onto the viewer to restore any annotations from the file onto their respective
+    images, provided those images are also currently loaded.</p>
 
   <br>
   <h1>Source &amp; Contributing</h1>
