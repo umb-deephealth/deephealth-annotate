@@ -101,9 +101,18 @@ export class AppComponent implements OnInit {
   }
 
 
-  // File drag & drop handler, $event contains an array of files
-  onFileDropped($event) {
-    this.loadDICOMImages($event);
+  // File drag & drop handler, event contains a FileList
+  onFileDropped(event) {
+    let fileType = event[0].type;
+    let fileList: Array<File> = Array.from(event);
+    let file: File = fileList[0];
+
+    if (fileList.length == 1 && fileType == 'application/json') {
+      this.viewPort.loadToolState(event);
+    }
+    else {
+      this.loadDICOMImages(event);
+    }
   }
 
 
