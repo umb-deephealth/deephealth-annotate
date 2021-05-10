@@ -66,11 +66,11 @@ export class AppComponent implements OnInit {
           document.getElementById('reset_bttn').click();
           break;
         case 'left':
-        case 'down':
+        case 'up':
           document.getElementById('previous_image_bttn').click();
           break;
         case 'right':
-        case 'up':
+        case 'down':
           document.getElementById('next_image_bttn').click();
           break;
         case '/':
