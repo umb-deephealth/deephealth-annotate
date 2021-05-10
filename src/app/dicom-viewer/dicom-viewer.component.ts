@@ -167,6 +167,10 @@ export class DICOMViewerComponent implements OnInit {
 
 
   public showSeries(index) {
+    if (this.viewPort.isClipPlaying) {
+      this.stopClip();
+    }
+
     this.currentSeriesIndex = index;
     this.currentSeries = this.seriesList[index];
     this.imageCount = this.currentSeries.imageCount; // get total image count
