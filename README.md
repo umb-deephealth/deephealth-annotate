@@ -1,7 +1,7 @@
 <!-- prettier-ignore-start -->
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg?label=License)](http://opensource.org/licenses/MIT)
-[![CodeQL](https://github.com/umb-deephealth/deephealth-annotate/actions/workflows/codeql-analysis.yml/badge.svg?branch=main)](https://github.com/umb-deephealth/deephealth-annotate/actions/workflows/codeql-analysis.yml)
 [![Angular Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.io/styleguide)
+[![CodeQL](https://github.com/umb-deephealth/deephealth-annotate/actions/workflows/codeql-analysis.yml/badge.svg?branch=main)](https://github.com/umb-deephealth/deephealth-annotate/actions/workflows/codeql-analysis.yml)
 [![All Contributors](https://img.shields.io/badge/All_Contributors-6-blue.svg?style=flat)](#contributors)
 <!-- prettier-ignore-end -->
 
@@ -24,7 +24,7 @@ Thanks to all of our contributors:
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-This project follows the [all-contributors][all-contributors] specification.
+_Note: This project follows the [all-contributors][all-contributors] specification._
 
 ## Contributing
 
