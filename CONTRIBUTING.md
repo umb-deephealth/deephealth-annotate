@@ -2,7 +2,13 @@
 
 _---This section is under construction.---_
 
-_---Table of Contents---_
+**Table of Contents:**
+
+1. [Getting Started](#Getting-Started)
+2. [Architecture](#Architecture)
+3. [Building & Deployment](#Building--Deployment)
+
+## Getting Started
 
 To start, clone the repository to your development machine:
 
@@ -24,7 +30,15 @@ ng serve
 
 If successful, this should spin up a dev server. Navigate to `http://localhost:4200/` in your browser. The app will automatically reload if you change any of the source files.
 
+## Architecture
+
 _--------APPLICATION ARCHITECTURE AND MAKING CHANGES GOES HERE----------_
+
+Finally, commit and push your changes to the remote repository. Then, open a pull request.
+
+## Building & Deployment
+
+GitHub Pages, the deployment environment for the application, is set to look at the '/docs' directory of the 'main' branch for build artifacts to serve at [https://umb-deephealth.github.io/deephealth-annotate/](https://umb-deephealth.github.io/deephealth-annotate/). This means code changes will need to be accepted and merged into the 'main' branch. Then, a new build of '/docs' must be made from the latest version of 'main' and pushed upstream to the remote repository to be served.
 
 To perform a new production build, run the following from the root application directory:
 
@@ -38,6 +52,4 @@ The build artifacts will be stored in the 'docs' directory given as an argument 
 git add docs
 ```
 
-Finally, commit and push your changes to the remote repository. Then, open a pull request.
-
-GitHub Pages, the deployment environment for the application, is set to look at the root directory of the 'prod' branch for build artifacts to serve at [https://umb-deephealth.github.io/deephealth-annotate/](https://umb-deephealth.github.io/deephealth-annotate/). This means changes will need to be accepted and merged into the 'main' branch. Then, a corresponding build of '/docs' must be made from the latest version of 'main', and the contents of that new '/docs' folder must be pushed to the 'prod' branch in order for those changes to be reflected in the production application.
+Finally, commit and push your changes.
