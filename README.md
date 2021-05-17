@@ -7,31 +7,11 @@
 
 # DeepHealth Annotate
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.2.
+[DeepHealth Annotate][deephealth-annotate] is a web-based tool for viewing and annotating DICOM images. Annotation metadata can be exported in JSON format to be used for a variety of purposes, such as training input for deep learning models using bounding box algorithms.
 
-## Development server
+To get started, follow the link above to go to the application, then click the "Choose DICOM Files" button in the top-right corner of the page and select all desired DICOM files from your local machine to load them into the viewer, or simply drag and drop the files onto the window.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+For further help with application usage, consult the Info menu within the app by clicking on the (?) icon in the top-right corner of the page.
 
 ## Contributors
 
@@ -39,17 +19,23 @@ Thanks to all of our contributors:
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
-| [<img src="https://avatars.githubusercontent.com/u/3970591?s=400&u=0d0412c4664fd9fdd4ad6acf6d7efc35e20b09e4&v=4" width="100px;" alt="Ryan Dern"/><br /><sub><b>Ryan Dern</b></sub>](https://www.linkedin.com/in/rdern)<br />[💻](https://github.com/RMDern "GitHub") | [<img src="https://avatars.githubusercontent.com/u/31746926?v=4" width="100px;" alt="Ayah Aboelela"/><br /><sub><b>Ayah Aboelela</b></sub>](https://github.com/ayahea)<br />[💻](https://github.com/ayahea "GitHub") | [<img src="https://avatars.githubusercontent.com/u/79118882?v=4" width="100px;" alt="Sahmeer Odies"/><br /><sub><b>Sahmeer Odies</b></sub>](https://github.com/SahmeerOdies)<br />[💻](https://github.com/SahmeerOdies "GitHub") | [<img src="https://avatars.githubusercontent.com/u/50211940?v=4" width="100px;" alt="Alvin Lam"/><br /><sub><b>Alvin Lam</b></sub>](https://github.com/alvin688)<br />[💻](https://github.com/alvin688 "GitHub") | [<img src="https://avatars.githubusercontent.com/u/33044191?v=4" width="100px;" alt="Rob Steele"/><br /><sub><b>Rob Steele</b></sub>](https://github.com/RWadeS)<br />[💻](https://github.com/RWadeS "GitHub") | [<img src="https://avatars.githubusercontent.com/u/36428213?v=4" width="100px;" alt="Freddy Mansour"/><br /><sub><b>Freddy Mansour</b></sub>](https://github.com/fmansour10)<br />[💻](https://github.com/fmansour10 "GitHub")
+| [<img src="https://avatars.githubusercontent.com/u/3970591?s=400&u=0d0412c4664fd9fdd4ad6acf6d7efc35e20b09e4&v=4" width="100px;" alt="Ryan Dern"/><br /><sub><b>Ryan Dern</b></sub>](https://github.com/RMDern)<br />[💻](https://github.com/RMDern "GitHub") [💼](https://www.linkedin.com/in/rdern/ "LinkedIn") | [<img src="https://avatars.githubusercontent.com/u/31746926?v=4" width="100px;" alt="Ayah Aboelela"/><br /><sub><b>Ayah Aboelela</b></sub>](https://github.com/ayahea)<br />[💻](https://github.com/ayahea "GitHub") [💼](https://www.linkedin.com/in/ayah-aboelela-4b88b8152/ "LinkedIn") | [<img src="https://avatars.githubusercontent.com/u/79118882?v=4" width="100px;" alt="Sahmeer Odies"/><br /><sub><b>Sahmeer Odies</b></sub>](https://github.com/SahmeerOdies)<br />[💻](https://github.com/SahmeerOdies "GitHub") [💼](https://www.linkedin.com/in/sahmeerodies/ "LinkedIn") | [<img src="https://avatars.githubusercontent.com/u/50211940?v=4" width="100px;" alt="Alvin Lam"/><br /><sub><b>Alvin Lam</b></sub>](https://github.com/alvin688)<br />[💻](https://github.com/alvin688 "GitHub") [💼](https://www.linkedin.com/in/alvin-lam-341692171/ "LinkedIn") | [<img src="https://avatars.githubusercontent.com/u/33044191?v=4" width="100px;" alt="Rob Steele"/><br /><sub><b>Rob Steele</b></sub>](https://github.com/RWadeS)<br />[💻](https://github.com/RWadeS "GitHub") [💼](https://www.linkedin.com/in/robert-steele/ "LinkedIn") | [<img src="https://avatars.githubusercontent.com/u/36428213?v=4" width="100px;" alt="Freddy Mansour"/><br /><sub><b>Freddy Mansour</b></sub>](https://github.com/fmansour10)<br />[💻](https://github.com/fmansour10 "GitHub") [💼](https://www.linkedin.com/in/freddymansour/ "LinkedIn")
 | :---: | :---: | :---: | :---: | :---: | :---: |
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors][all-contributors] specification.
-Contributions of any kind welcome!
+
+## Contributing
+
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
 ## License
 
 [MIT](LICENSE)
 
 <!-- prettier-ignore-start -->
+[deephealth-annotate]: https://umb-deephealth.github.io/deephealth-annotate/
 [all-contributors]: https://github.com/kentcdodds/all-contributors
 <!-- prettier-ignore-end -->
