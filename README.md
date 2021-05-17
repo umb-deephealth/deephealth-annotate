@@ -2,14 +2,18 @@
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg?label=License)](http://opensource.org/licenses/MIT)
 [![Angular Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.io/styleguide)
 [![CodeQL](https://github.com/umb-deephealth/deephealth-annotate/actions/workflows/codeql-analysis.yml/badge.svg?branch=main)](https://github.com/umb-deephealth/deephealth-annotate/actions/workflows/codeql-analysis.yml)
-[![All Contributors](https://img.shields.io/badge/All_Contributors-6-blue.svg?style=flat)](#contributors)
+[![Contributors](https://img.shields.io/badge/All_Contributors-6-blue.svg?style=flat)](#contributors)
 <!-- prettier-ignore-end -->
 
 # DeepHealth Annotate
 
 [DeepHealth Annotate][deephealth-annotate] is a web-based tool for viewing and annotating DICOM images.
 
-Viewer tools are provided to adjust windowing (brightness/contrast), zoom, invert, and panning of the image. Annotation tools are provided for marking images with either rectangles or line measurements. These annotations are defined by their bounding (x,y) coordinates as well as some other metadata (units in the case of Length annotations, for example). All annotation metadata can be exported in JSON format to be used for a variety of purposes, such as training input for deep learning models which use bounding box algorithms. The downloaded JSON files can also be later used to restore any annotation state stored in them by simply dragging and dropping the relevant JSON file onto the viewer while the images are loaded.
+Viewer tools are provided to adjust windowing (brightness/contrast), zoom, invert, and panning of the image.
+
+Annotation tools are provided for marking images with either Rectangles or Length measurements. These annotations are defined by their bounding (x,y) coordinates as well as some other metadata (units such as "mm" in the case of line Length annotations, for example).
+
+All annotation metadata can be exported in JSON format to be used for a variety of purposes, such as training input for deep learning models using bounding box algorithms. The downloaded JSON files can also be later used to restore any annotation state stored in them by simply dragging and dropping the relevant JSON file onto the viewer while the images are loaded.
 
 To get started, follow the link above to go to the application, then click the "Choose DICOM Files" button in the top-right corner of the page and select all desired DICOM files from your local machine to load them into the viewer, or simply drag and drop the files onto the window.
 
