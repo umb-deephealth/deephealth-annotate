@@ -2,7 +2,11 @@
 
 _---This section is under construction.---_
 
-Table of Contents: -[Getting Started](#Getting-Started) -[Architecture](#Architecture) -[Building & Deployment](#Building-&-Deployment)
+**Table of Contents:**
+
+1. [Getting Started](#Getting-Started)
+2. [Architecture](#Architecture)
+3. [Building & Deployment](#Building-&-Deployment)
 
 ## Getting Started
 
