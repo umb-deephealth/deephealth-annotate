@@ -22,10 +22,10 @@ Before we begin making changes, let's create a new git branch to work on and set
 git checkout -b YOUR_BRANCH_NAME
 ```
 
-Now, we can try to run the application (from the root app directory containing 'package.json'):
+Now, we can install dependencies and run the application (from the app's root directory containing 'package.json'):
 
 ```bash
-ng serve
+npm install && ng serve
 ```
 
 If successful, this should spin up a dev server. Navigate to `http://localhost:4200/` in your browser. The app will automatically reload if you change any of the source files.
