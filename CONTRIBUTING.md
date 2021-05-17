@@ -38,7 +38,7 @@ Finally, commit and push your changes to the remote repository. Then, open a pul
 
 ## Building & Deployment
 
-GitHub Pages, the deployment environment for the application, is set to look at the '/docs' directory of the 'main' branch for build artifacts to serve at [https://umb-deephealth.github.io/deephealth-annotate/](https://umb-deephealth.github.io/deephealth-annotate/). This means code changes will need to be accepted and merged into the 'main' branch. Then, a new build of '/docs' must be made from the latest version of 'main' and pushed upstream to the remote repository to be served.
+GitHub Pages, the deployment environment for the application, is set to look at the `/docs` directory of the `main` branch for build artifacts to serve at [https://umb-deephealth.github.io/deephealth-annotate/](https://umb-deephealth.github.io/deephealth-annotate/). This means code changes will need to be accepted and merged into the `main` branch. Then, a new build of `/docs` must be made from the latest version of `main` and pushed upstream to the remote repository to be served.
 
 To perform a new production build, run the following from the root application directory:
 
@@ -46,7 +46,7 @@ To perform a new production build, run the following from the root application d
 ng build --prod=true --outputPath=docs --baseHref=/deephealth-annotate/
 ```
 
-The build artifacts will be stored in the 'docs' directory given as an argument to '--outputPath'. When complete, be sure to add these new artifacts to your git index:
+The build artifacts will be stored in the `/docs` directory given as an argument to '--outputPath'. When complete, be sure to add these new artifacts to your git index:
 
 ```bash
 git add docs
