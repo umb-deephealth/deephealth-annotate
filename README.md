@@ -7,7 +7,9 @@
 
 # DeepHealth Annotate
 
-[DeepHealth Annotate][deephealth-annotate] is a web-based tool for viewing and annotating DICOM images. Annotation metadata can be exported in JSON format to be used for a variety of purposes, such as training input for deep learning models using bounding box algorithms.
+[DeepHealth Annotate][deephealth-annotate] is a web-based tool for viewing and annotating DICOM images.
+
+Viewer tools are provided to adjust windowing (brightness/contrast), zoom, invert, and panning of the image. Annotation tools are provided for marking images with either rectangles or line measurements. These annotations are defined by their bounding (x,y) coordinates as well as some other metadata (units in the case of Length annotations, for example). All annotation metadata can be exported in JSON format to be used for a variety of purposes, such as training input for deep learning models which use bounding box algorithms. The downloaded JSON files can also be later used to restore any annotation state stored in them by simply dragging and dropping the relevant JSON file onto the viewer while the images are loaded.
 
 To get started, follow the link above to go to the application, then click the "Choose DICOM Files" button in the top-right corner of the page and select all desired DICOM files from your local machine to load them into the viewer, or simply drag and drop the files onto the window.
 
@@ -28,8 +30,7 @@ _Note: This project follows the [all-contributors][all-contributors] specificati
 
 ## Contributing
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Documentation describing the general architecture, examples of how to make changes, as well as how to run, build, and deploy the application can be found [here][contributing-md].
 
 ## License
 
@@ -38,4 +39,5 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 <!-- prettier-ignore-start -->
 [deephealth-annotate]: https://umb-deephealth.github.io/deephealth-annotate/
 [all-contributors]: https://github.com/kentcdodds/all-contributors
+[contributing-md]: https://github.com/umb-deephealth/deephealth-annotate/blob/main/CONTRIBUTING.md
 <!-- prettier-ignore-end -->
