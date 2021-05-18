@@ -6,7 +6,8 @@ _---This section is under construction.---_
 
 1. [Getting Started](#Getting-Started)
 2. [Architecture](#Architecture)
-3. [Building & Deployment](#Building--Deployment)
+3. [Making Changes](#Making-Changes)
+4. [Building & Deployment](#Building--Deployment)
 
 ## Getting Started
 
