@@ -53,7 +53,7 @@ We also have a few folders:
 
 - `/app` contains the root `AppComponent`, as well as folders for any other Angular components, services, or directives that make up the application.
 
-If you are not familiar with the Angular framework and the component model it uses, we recommend reading the following [documentation][ng-components] to get comfortable with all the basic building blocks of an Angular application before continuing on with making changes. Relevant topics include components, templates, views, styles, directives, data binding, and component interaction.
+If you are not familiar with the Angular framework and the component model it uses, we recommend reading the following [documentation][ng-components] to get comfortable with all the basic building blocks of an Angular application before continuing on with making changes. Relevant topics include components, templates, styles, directives, modules, data binding, and component interaction.
 
 ## Making Changes
 
@@ -65,11 +65,33 @@ In the `/src/app` directory, we can see that our app has a few core pieces:
 
 - `/info-dialog`, containing the HTML template for the Info (?) modal that can be triggered.
 
-- `/dicom-viewer`, containing the DICOM viewer component that makes up the bulk of our app. The `cornerstone.directive.ts` file contains the directive that encapsulates [Cornerstone.js][cornerstone] functionality for use within the component.
+- `/dicom-viewer`, containing the DICOM viewer component that makes up the bulk of our app. Also holds the `cornerstone.directive.ts` file that encapsulates [Cornerstone.js][cornerstone] functionality for use within the component.
 
-_CHANGE EXAMPLE GOES HERE_
+We will focus on breaking down the `dicom-viewer` component here, since the other components are relatively straightforward and are sufficiently explained with short descriptions.
 
-Finally, commit and push your changes to the remote repository. Then, open a pull request.
+### HTML
+
+Starting in the HTML template, `dicom-viewer.component.html`, notice that the component is made up of a flex container holding three main pieces:
+
+The Thumbnail Selector (left side of the page). This is allows the user to select between different 'series', which is a stack of images defining a particular scan where each image is at a different level of depth within the 3D object.
+
+![Thumbnail][thumbnail-img]
+
+The Toolbar, centered at the top of the viewer window, which holds the buttons used to select tools, move through images within the current series, and trigger annotation download. The icons used are sourced from [Font Awesome][font-awesome].
+
+![Toolbar][button-img]
+
+And the Viewer, which displays the current loaded DICOM image and the metadata associated with it.
+
+![Viewer][viewer-img]
+
+### TypeScript
+
+The TypeScript code for any behavior associated with the `dicom-viewer` component can be found in the `dicom-viewer.component.ts` file. If you're interested in changing the code for the UI surface which allows the user to interact with the Cornerstone instance, this is likely where you want to look.
+
+Additionally, the `cornerstone.directive.ts` file defines a `CornerstoneDirective` that encapsulates behavior from the Cornerstone library for use within this Angular app. If you're interested in changing fundamental Cornerstone behavior and settings, this is likely where you want to look.
+
+Once you've finished modifying and testing, commit and push your changes to the remote repository. Then, open a pull request for your changes to be reviewed and merged into the main branch.
 
 ## Building & Deployment
 
@@ -97,4 +119,8 @@ Finally, commit and push your changes.
 [wado-loader]: https://github.com/cornerstonejs/cornerstoneWADOImageLoader
 [ng-components]: https://angular.io/guide/component-overview
 [cornerstone]: https://github.com/cornerstonejs/cornerstone
+[font-awesome]: https://fontawesome.com/icons?d=gallery&p=2
+[viewer-img]: https://github.com/umb-deephealth/deephealth-annotate/blob/main/CONTRIBUTING/viewer.png
+[button-img]: https://github.com/umb-deephealth/deephealth-annotate/blob/main/CONTRIBUTING/button.png
+[thumbnail-img]: https://github.com/umb-deephealth/deephealth-annotate/blob/main/CONTRIBUTING/thumbnailselector.png
 <!-- prettier-ignore-end -->
