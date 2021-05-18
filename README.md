@@ -1,8 +1,8 @@
 <!-- prettier-ignore-start -->
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg?label=License)](http://opensource.org/licenses/MIT)
 [![Angular Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.io/styleguide)
-[![CodeQL](https://github.com/umb-deephealth/deephealth-annotate/actions/workflows/codeql-analysis.yml/badge.svg?branch=main)](https://github.com/umb-deephealth/deephealth-annotate/actions/workflows/codeql-analysis.yml)
 [![Contributors](https://img.shields.io/badge/All_Contributors-6-blue.svg?style=flat)](#contributors)
+[![CodeQL](https://github.com/umb-deephealth/deephealth-annotate/actions/workflows/codeql-analysis.yml/badge.svg?branch=main)](https://github.com/umb-deephealth/deephealth-annotate/actions/workflows/codeql-analysis.yml)
 [![Build](https://img.shields.io/github/deployments/umb-deephealth/deephealth-annotate/github-pages?label=Build)][deephealth-annotate]
 <!-- prettier-ignore-end -->
 
@@ -44,5 +44,5 @@ Documentation describing the general architecture, examples of how to make chang
 <!-- prettier-ignore-start -->
 [deephealth-annotate]: https://umb-deephealth.github.io/deephealth-annotate/
 [all-contributors]: https://github.com/kentcdodds/all-contributors
-[contributing-md]: https://github.com/umb-deephealth/deephealth-annotate/blob/main/CONTRIBUTING.md
+[contributing-md]: https://github.com/umb-deephealth/deephealth-annotate/blob/main/CONTRIBUTING/CONTRIBUTING.md
 <!-- prettier-ignore-end -->
