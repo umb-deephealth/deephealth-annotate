@@ -3,6 +3,7 @@
 [![Angular Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.io/styleguide)
 [![CodeQL](https://github.com/umb-deephealth/deephealth-annotate/actions/workflows/codeql-analysis.yml/badge.svg?branch=main)](https://github.com/umb-deephealth/deephealth-annotate/actions/workflows/codeql-analysis.yml)
 [![Contributors](https://img.shields.io/badge/All_Contributors-6-blue.svg?style=flat)](#contributors)
+[![Build](https://img.shields.io/github/deployments/umb-deephealth/deephealth-annotate/github-pages?label=Build)][deephealth-annotate]
 <!-- prettier-ignore-end -->
 
 # DeepHealth Annotate
