@@ -44,5 +44,5 @@ Documentation describing the general architecture, examples of how to make chang
 <!-- prettier-ignore-start -->
 [deephealth-annotate]: https://umb-deephealth.github.io/deephealth-annotate/
 [all-contributors]: https://github.com/kentcdodds/all-contributors
-[contributing-md]: https://github.com/umb-deephealth/deephealth-annotate/blob/main/CONTRIBUTING.md
+[contributing-md]: https://github.com/umb-deephealth/deephealth-annotate/blob/main/CONTRIBUTING/CONTRIBUTING.md
 <!-- prettier-ignore-end -->
