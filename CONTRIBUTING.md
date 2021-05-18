@@ -46,7 +46,7 @@ Last but certainly not least is the `/src` folder, which contains our Angular ap
 
 We also have a few folders:
 
-- `/environments` contains configurations scripts for setting up different environments for testing, development, prod, etc.
+- `/environments` contains configuration scripts for setting up different environments for testing, development, prod, etc.
 
 - `/assets` contains all of the image assets we use, as well as the [CornerstoneWADOImageLoader][wado-loader] codec used for parsing and loading DICOM data.
 
@@ -58,7 +58,7 @@ If you are not familiar with the Angular framework and the component model it us
 
 In the `/src/app` directory, we can see that our app has a few core pieces:
 
-- `AppComponent`, the root component that embeds the DICOM viewer and handles global hotkeys as well as handing off of input images to the viewer for loading.
+- `AppComponent`, the root component that embeds the DICOM viewer and handles global hotkeys as well as handing off input images to the viewer for loading.
 
 - `/dragdrop`, which is a custom directive used to handle mouse drag-and-drop events for file input.
 
