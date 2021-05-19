@@ -14,7 +14,7 @@ Viewer tools are provided to adjust windowing (brightness/contrast), zoom, inver
 
 Annotation tools are provided for marking images with either Rectangles or Length measurements. These annotations are defined by their bounding (x,y) coordinates as well as some other metadata (units such as "mm" in the case of line Length annotations, for example).
 
-All annotation metadata can be exported in JSON format to be used for a variety of purposes, such as training input for deep learning models using bounding box algorithms. The downloaded JSON files can also be later used to restore any annotation state stored in them by simply dragging and dropping the relevant JSON file onto the viewer while the images are loaded.
+All annotation metadata can be exported in JSON format to be used for a variety of purposes, such as training input for [deep learning models][deephealth-paper] using bounding box algorithms. The downloaded JSON files can also be later used to restore any annotation state stored in them by simply dragging and dropping the relevant JSON file onto the viewer while the images are loaded.
 
 To get started, follow the link above to go to the application, then click the "Choose DICOM Files" button in the top-right corner of the page and select all desired DICOM files from your local machine to load them into the viewer, or simply drag and drop the files onto the window.
 
@@ -45,4 +45,5 @@ Documentation describing the general architecture, examples of how to make chang
 [deephealth-annotate]: https://umb-deephealth.github.io/deephealth-annotate/
 [all-contributors]: https://github.com/kentcdodds/all-contributors
 [contributing-md]: https://github.com/umb-deephealth/deephealth-annotate/blob/main/CONTRIBUTING/CONTRIBUTING.md
+[deephealth-paper]: https://arxiv.org/pdf/1912.11027.pdf
 <!-- prettier-ignore-end -->
