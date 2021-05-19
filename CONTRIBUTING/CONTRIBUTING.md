@@ -69,13 +69,13 @@ We will focus on breaking down the `dicom-viewer` component here, since the othe
 
 ### DICOM-Viewer: HTML
 
-Starting in the HTML template, `dicom-viewer.component.html`, notice that the component is made up of a flex container holding three main pieces:
+Starting in the HTML template, `dicom-viewer.component.html`, notice that the component is made up of a flex container holding three main UI elements:
 
 The Thumbnail Selector (left side of the page). This allows the user to select between different 'series', which is a stack of images defining a particular scan where each image is at a different level of depth within the 3D object.
 
 ![Thumbnail][thumbnail-img]
 
-The Toolbar, centered at the top of the viewer window, which holds the buttons used to select tools, move through images within the current series, and trigger annotation download. The icons used are sourced from [Font Awesome][font-awesome].
+The Toolbar, centered at the top of the viewer window, which holds the buttons used to select tools, move through images within the current series, and trigger annotation download. The icons used are sourced from [Font Awesome][font-awesome]. Here we're using `[ngStyle]` to dynamically determine CSS styling based on whether a given tool is selected or not, as returned by the `showSelectedTool('ToolName')` function defined in the component's TypeScript. Adding a new button is as simple as copying one of the button code blocks (as shown below) and adding it to the parent div. Just change the icon, click handler, and implement `showSelectedTool()` for the dynamic tool styling if it's a button with a 'selected' state.
 
 ![Toolbar][button-img]
 
@@ -88,6 +88,12 @@ And the Viewer, which displays the current loaded DICOM image and the metadata a
 The TypeScript code for any behavior associated with the `dicom-viewer` component can be found in the `dicom-viewer.component.ts` file. If you're interested in changing the code for the UI surface which allows the user to interact with the Cornerstone instance, this is likely where you want to look.
 
 Additionally, the `cornerstone.directive.ts` file defines a `CornerstoneDirective` that encapsulates behavior from the Cornerstone library for use within this Angular app. If you're interested in changing fundamental Cornerstone behavior and settings, this is likely where you want to look.
+
+Whenever you're working with code that deals directly with DICOM data, you may see something like the following:
+
+![Series][series-json-img]
+
+The lines above are extracting metadata (as a string) from the DICOM file at different hex offsets. If you're wondering what metadata exists in the DICOM files you have, we suggest loading it into the [DICOM Standard Browser][dicom-browser] file editor, which allows you to browse all potential fields that could be packed into a standard DICOM file and tells you at what offsets they are located. Once you load a file, the fields that have values in your file will be highlighted and can be inspected. This is an incredibly useful tool for working with DICOM images.
 
 Once you've finished modifying and testing, commit and push your changes to the remote repository. Then, open a pull request for your changes to be reviewed and merged into the main branch.
 
@@ -121,4 +127,6 @@ Finally, commit and push your changes.
 [viewer-img]: https://github.com/umb-deephealth/deephealth-annotate/blob/main/CONTRIBUTING/viewer.png
 [button-img]: https://github.com/umb-deephealth/deephealth-annotate/blob/main/CONTRIBUTING/button.png
 [thumbnail-img]: https://github.com/umb-deephealth/deephealth-annotate/blob/main/CONTRIBUTING/thumbnailselector.png
+[series-json-img]: https://github.com/umb-deephealth/deephealth-annotate/blob/main/CONTRIBUTING/series.png
+[dicom-browser]: https://dicom.innolitics.com/ciods
 <!-- prettier-ignore-end -->
