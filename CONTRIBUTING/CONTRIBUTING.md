@@ -31,7 +31,7 @@ If successful, this should spin up a dev server. Navigate to `http://localhost:4
 
 ## Architecture
 
-This project was generated with [Angular CLI][angular-cli] 11.2.2. Angular project configuration settings can be found in the root directory in [angular.json][angular-json], together with [package.json][package-json], which defines the project's [NPM][npmjs] settings, build scripts, and dependencies.
+This project was generated with [Angular CLI][angular-cli] 17.0.1. Angular project configuration settings can be found in the root directory in [angular.json][angular-json], together with [package.json][package-json], which defines the project's [NPM][npmjs] settings, build scripts, and dependencies.
 
 The `/docs` folder contains only build artifacts. We can ignore it until we discuss [Building & Deployment](#building--deployment).
 
@@ -104,10 +104,10 @@ GitHub Pages, the deployment environment for the application, is set to look at 
 To perform a new production build, run the following from the root application directory on branch `main`:
 
 ```bash
-ng build --prod=true --outputPath=docs --baseHref=/deephealth-annotate/
+ng build
 ```
 
-The build artifacts will be stored in the `/docs` directory given as an argument to '--outputPath'. When complete, be sure to add these new artifacts to your git index:
+The build artifacts will be stored in the `/docs` directory controlled by 'outputPath' given in angular.json file. When complete, be sure to add these new artifacts to your git index:
 
 ```bash
 git add docs
