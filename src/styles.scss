@@ -57,3 +57,15 @@ html, body {
     color:rgb(0, 132, 255);
   }
 }
+
+.mat-spinner {
+
+  scrollbar-width: none;
+  float: inline-end;
+  margin-top: 7px;
+  margin-right: 7px;
+  
+  .mdc-circular-progress__indeterminate-container {
+    overflow: hidden;
+  }
+}
